@@ -7,4 +7,8 @@
     <string name="title_activity_add_media">AddMediaActivity</string>
     <string name="title_activity_add_text">AddTextActivity</string>
     <string name="title_activity_spotify_search">SpotifySearchActivity</string>
+    <string name="next">NEXT</string>
+    <string name="trip_name">Name of Trip</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
 </resources>
