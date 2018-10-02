@@ -1,33 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="com.example.clairescout.mytravelapp.VacationFeedActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/vacation_feed"-->
+        <!--android:paddingLeft="15dp"-->
+        <!--android:paddingRight="15dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    <RelativeLayout
+        android:id="@+id/music_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:padding="10dp"
+        android:background="@drawable/border_shadow"
+        android:layout_alignParentBottom="true">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
 
-    </android.support.design.widget.AppBarLayout>
+            <TextView
+                android:id="@+id/song_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:text="Places"/>
 
-    <include layout="@layout/content_vacation_feed" />
+            <ImageView
+                android:id="@+id/dot"
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="0dp"
+                android:layout_toRightOf="@+id/song_name"
+                android:src="@drawable/dot" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+            <TextView
+                android:id="@+id/song_artist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_toRightOf="@+id/dot"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:text="The National Parks"/>
 
-</android.support.design.widget.CoordinatorLayout>
+        </RelativeLayout>
+
+
+        <ImageButton
+            android:id="@+id/play_button"
+            android:layout_width="42dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:paddingTop="4dp"
+            android:background="@null"
+            android:src="@drawable/play_accent" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
