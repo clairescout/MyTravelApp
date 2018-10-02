@@ -14,12 +14,15 @@
         android:layout_width="match_parent"
         android:layout_height="413dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_weight="4"
         map:layout_constraintBottom_toBottomOf="parent"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintStart_toStartOf="parent"
         map:layout_constraintTop_toTopOf="parent"
-        map:layout_constraintVertical_bias="0.391"
-        tools:layout_editor_absoluteX="0dp" />
+        map:layout_constraintVertical_bias="0.391" />
 
     <TextView
         android:id="@+id/textView2"
