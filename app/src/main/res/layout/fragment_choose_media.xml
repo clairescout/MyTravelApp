@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="15dp"
+            android:gravity="center">
+
+            <ImageButton
+                android:id ="@+id/camera_button"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/round_button"
+                android:src="@drawable/camera"
+                android:scaleType="fitCenter"
+                android:padding="15dp"
+                android:layout_margin="15dp"/>
+
+            <ImageButton
+                android:id="@+id/text_button"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/round_button"
+                android:src="@drawable/text"
+                android:scaleType="fitCenter"
+                android:padding="15dp"
+                android:layout_margin="15dp"/>
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/spotify_button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/round_button"
+            android:src="@drawable/spotify"
+            android:scaleType="fitCenter"
+            android:padding="22dp"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
