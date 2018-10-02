@@ -21,10 +21,6 @@
             android:label="@string/title_activity_new_vacation"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MyVacationsActivity"
-            android:label="@string/title_activity_my_vacations"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".VacationFeedActivity"
             android:label="@string/title_activity_vacation_feed"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -54,7 +50,17 @@
 
         <activity
             android:name=".ChooseLocationActivity"
-            android:label="@string/title_activity_choose_location"></activity>
+            android:label="@string/title_activity_choose_location"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MyVacationsActivity"
+            android:label="@string/title_activity_my_vacations"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

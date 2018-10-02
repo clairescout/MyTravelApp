@@ -11,7 +11,6 @@
     <string name="trip_name">Name of Trip</string>
     <string name="start_date">Start Date</string>
     <string name="end_date">End Date</string>
-    <string name="title_activity_choose_location">ChooseLocationActivity</string>
     <string name="upload">Upload</string>
     <string name="journal_entry">Journal Entry</string>
     <string name="write_caption">Write Caption</string>
