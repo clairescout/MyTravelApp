@@ -1,31 +1,26 @@
 package com.example.models;
 
-import sun.jvm.hotspot.utilities.BitMap;
 
 /**
  * Created by clairescout on 9/27/18.
  */
 
 public class Photo extends Memory{
-    private BitMap photo;
+    private String photoPath;
 
-    public Photo(String text, BitMap photo) {
+    public Photo(String text, String photoPath) {
         super(text);
-        this.photo = photo;
-    }
-
-    public Photo(BitMap photo) {
-        this.photo = photo;
+        this.photoPath = photoPath;
     }
 
     public Photo() {
     }
 
-    public BitMap getPhoto() {
-        return photo;
+    public String getPhotoPath() {
+        return photoPath;
     }
 
-    public void setPhoto(BitMap photo) {
-        this.photo = photo;
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
     }
 }

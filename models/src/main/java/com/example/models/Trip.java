@@ -1,5 +1,7 @@
 package com.example.models;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +19,14 @@ public class Trip {
 
 
     public Trip() {
+    }
+
+    public Trip(String name, List<Memory> memories, Date startDate, Date endDate, Song song) {
+        this.name = name;
+        this.memories = memories;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.song = song;
     }
 
     public String getName() {
@@ -57,5 +67,15 @@ public class Trip {
 
     public void setSong(Song song) {
         this.song = song;
+    }
+
+    public String getStartDateString() {
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        return df.format(startDate);
+    }
+
+    public String getEndDateString() {
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        return df.format(endDate);
     }
 }

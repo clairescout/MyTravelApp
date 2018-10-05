@@ -4,78 +4,142 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp">
 
-    <TextView
-        android:id="@+id/vacation_name"
-        android:layout_width="wrap_content"
-        android:layout_height="172dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/templemount"
-        android:gravity="center_horizontal"
-        android:paddingTop="35dp"
-        android:text="Jerusalem"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+    <!--<TextView-->
+        <!--android:id="@+id/vacation_name"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="172dp"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:background="@drawable/jordan_river"-->
+        <!--android:gravity="center_horizontal"-->
+        <!--android:paddingTop="35dp"-->
+        <!--android:text="Jordan"-->
+        <!--android:textAppearance="@style/TextAppearance.AppCompat.Display1"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:textStyle="bold"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.0"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:layout_constraintVertical_bias="0.0"-->
+        <!--android:layout_marginRight="8dp" />-->
 
-    <TextView
-        android:id="@+id/start_date"
-        android:layout_width="wrap_content"
+    <!--<TextView-->
+        <!--android:id="@+id/start_date"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginStart="92dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:text="05/02/2017"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:textStyle="bold"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="@+id/vacation_name"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:layout_constraintVertical_bias="0.503"-->
+        <!--android:layout_marginLeft="92dp" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/em_dash"-->
+        <!--android:layout_width="5dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:text="—"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:textStyle="bold"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/vacation_name"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/end_date"-->
+        <!--app:layout_constraintHorizontal_bias="0.441"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/start_date"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/vacation_name"-->
+        <!--app:layout_constraintVertical_bias="0.503" />-->
+
+
+    <!--<TextView-->
+        <!--android:id="@+id/end_date"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginEnd="92dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:text="08/25/2017"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:textStyle="bold"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="@+id/vacation_name"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:layout_constraintVertical_bias="0.503"-->
+        <!--android:layout_marginRight="92dp" />-->
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="8dp"
-        android:text="05/02/2017"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/vacation_name"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.503"
-        android:layout_marginLeft="92dp" />
+        android:layout_margin="2dp"
+        card_view:cardCornerRadius="0dp"
+        card_view:cardElevation="5dp"
+        android:id="@+id/vacation_card">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/jordan_river"
+                android:id="@+id/card_image"/>
 
-    <TextView
-        android:id="@+id/em_dash"
-        android:layout_width="5dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="—"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/vacation_name"
-        app:layout_constraintEnd_toStartOf="@+id/end_date"
-        app:layout_constraintHorizontal_bias="0.441"
-        app:layout_constraintStart_toEndOf="@+id/start_date"
-        app:layout_constraintTop_toTopOf="@+id/vacation_name"
-        app:layout_constraintVertical_bias="0.503" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:padding="4dp">
 
+                <TextView
+                    android:id="@+id/vacation_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:text="Jordan"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/end_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="92dp"
-        android:layout_marginTop="8dp"
-        android:text="08/25/2017"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/vacation_name"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.503"
-        android:layout_marginRight="92dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="07/01/2017"
+                        android:textColor="#555"
+                        android:id="@+id/start_date"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" - "
+                        android:textColor="#555" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="07/05/2017"
+                        android:textColor="#555"
+                        android:id="@+id/end_date"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 </android.support.constraint.ConstraintLayout>
