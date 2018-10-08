@@ -1,1 +1,1 @@
-include ':app', ':models'
+include ':app', ':models', ':spotify-app-remote', ':gson-2.8.2'
