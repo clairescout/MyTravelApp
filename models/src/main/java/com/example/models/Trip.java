@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+
 /**
  * Created by clairescout on 9/25/18.
  */
@@ -15,13 +16,14 @@ public class Trip {
     private Date startDate;
     private Date endDate;
     private Song song;
-    // will have lat long
+    private double latitude;
+    private double longitude;
 
 
     public Trip() {
     }
 
-    public Trip(String name, List<Memory> memories, Date startDate, Date endDate, Song song) {
+    public Trip(String name, List<Memory> memories, Date startDate, Date endDate, Song song, double latitude, double longitude) {
         this.name = name;
         this.memories = memories;
         this.startDate = startDate;
@@ -77,5 +79,21 @@ public class Trip {
     public String getEndDateString() {
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         return df.format(endDate);
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

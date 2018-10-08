@@ -31,16 +31,20 @@ public class User {
         this.trips = trips;
     }
 
+    public void addTrip(Trip trip) {
+        trips.add(trip);
+    }
+
     private void makeFakeData() {
         Trip trip = new Trip("Jerusalem", new ArrayList<Memory>(),
                 Calendar.getInstance().getTime(), Calendar.getInstance().getTime(),
-                new Song("Mason Jennings", "idk", "idk", "asdf") );
+                new Song("Mason Jennings", "idk", "idk", "asdf"), -33.852, 151.211);
         Trip trip2 = new Trip("Jordan", new ArrayList<Memory>(),
                 Calendar.getInstance().getTime(), Calendar.getInstance().getTime(),
-                new Song("Mason Jennings", "idk", "idk", "asdf") );
+                new Song("Mason Jennings", "idk", "idk", "asdf"), -20.2, -35.5);
         Trip trip3 = new Trip("Hawaii", new ArrayList<Memory>(),
                 Calendar.getInstance().getTime(), Calendar.getInstance().getTime(),
-                new Song("Mason Jennings", "idk", "idk", "asdf") );
+                new Song("Mason Jennings", "idk", "idk", "asdf"), 76.2, 151.211);
         trips.add(trip);
         trips.add(trip2);
         trips.add(trip3);

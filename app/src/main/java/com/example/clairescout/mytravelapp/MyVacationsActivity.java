@@ -1,7 +1,9 @@
 package com.example.clairescout.mytravelapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +29,12 @@ public class MyVacationsActivity extends FragmentActivity implements OnMapReadyC
     private GoogleMap mMap;
     private RecyclerView vacationsList;
     private VacationAdapter vacationAdapter;
+    private FloatingActionButton addVacationButton;
+
+    /*
+        TODO:
+            Make recycler view clickable
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +45,7 @@ public class MyVacationsActivity extends FragmentActivity implements OnMapReadyC
                 .findFragmentById(R.id.my_map);
         mapFragment.getMapAsync(this);
 
-
-        vacationsList = findViewById(R.id.recycler_trip_list);
-        vacationsList.setLayoutManager(new LinearLayoutManager(this));
-
-        vacationAdapter = new VacationAdapter();
-        vacationsList.setAdapter(vacationAdapter);
+        initializeWidgits();
     }
 
 
@@ -59,10 +62,12 @@ public class MyVacationsActivity extends FragmentActivity implements OnMapReadyC
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        // Add markers for each trip in list
+        for (Trip trip : User.getInstance().getTrips()) {
+            LatLng latlng = new LatLng(trip.getLatitude(), trip.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(latlng).title(trip.getName()));
+        }
+
     }
 
 
@@ -105,5 +110,31 @@ public class MyVacationsActivity extends FragmentActivity implements OnMapReadyC
         public int getItemCount() {
             return trips.size();
         }
+    }
+
+    public void initializeWidgits() {
+        addVacationButton = findViewById(R.id.add_vacation_floating_button);
+        addVacationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToNewVacationActivity();
+            }
+        });
+
+
+        vacationsList = findViewById(R.id.recycler_trip_list);
+        vacationsList.setLayoutManager(new LinearLayoutManager(this));
+
+        vacationAdapter = new VacationAdapter();
+        vacationsList.setAdapter(vacationAdapter);
+    }
+
+    public void goToNewVacationActivity() {
+        Intent intent = new Intent(this, NewVacationActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToSpecificVacation(){
+
     }
 }

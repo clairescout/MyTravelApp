@@ -1,8 +1,12 @@
 package com.example.clairescout.mytravelapp;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
+import com.example.models.Trip;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -10,9 +14,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import presenters.ChooseLocationPresenter;
+
 public class ChooseLocationActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    Button nextButton;
+    Trip trip;
+    // TODO: when you get trip from the intent, add it to presenter
+    // TODO: should we give trips ids? then we could just pass an id and get it from the user
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +32,16 @@ public class ChooseLocationActivity extends FragmentActivity implements OnMapRea
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        nextButton = findViewById(R.id.next_button);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ChooseLocationPresenter.getInstance().addLatLong(new LatLng(-20.3, -20.3));
+                ChooseLocationPresenter.getInstance().addTripToUser();
+                goToVacation();
+            }
+        });
     }
 
 
@@ -42,5 +62,11 @@ public class ChooseLocationActivity extends FragmentActivity implements OnMapRea
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+
+    public void goToVacation() {
+        // should we use trip ids or something?
+        Intent intent = new Intent(this, VacationFeedActivity.class);
+        startActivity(intent);
     }
 }
