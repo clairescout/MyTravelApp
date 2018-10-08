@@ -9,7 +9,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/gson-2.8.2" />
             <option value="$PROJECT_DIR$/models" />
+            <option value="$PROJECT_DIR$/spotify-app-remote" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
