@@ -31,11 +31,6 @@ public class MyVacationsActivity extends FragmentActivity implements OnMapReadyC
     private VacationAdapter vacationAdapter;
     private FloatingActionButton addVacationButton;
 
-    /*
-        TODO:
-            Make recycler view clickable
-     */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
