@@ -75,6 +75,7 @@ public class MyVacationsActivity extends FragmentActivity implements OnMapReadyC
         private TextView vacationName;
         private TextView startDate;
         private TextView endDate;
+        private String tripId;
         public VacationHolder(@NonNull View itemView) {
             super(itemView);
             vacationName = itemView.findViewById(R.id.vacation_name);
@@ -86,12 +87,13 @@ public class MyVacationsActivity extends FragmentActivity implements OnMapReadyC
             vacationName.setText(trip.getName());
             startDate.setText(trip.getStartDateString());
             endDate.setText(trip.getEndDateString());
+            tripId = trip.getId();
         }
 
 
         @Override
         public void onClick(View v) {
-
+            goToVacationFeed(tripId);
         }
     }
 
@@ -140,7 +142,9 @@ public class MyVacationsActivity extends FragmentActivity implements OnMapReadyC
         startActivity(intent);
     }
 
-    public void goToSpecificVacation(){
-
+    public void goToVacationFeed(String tripId){
+        Intent intent = new Intent(this, VacationFeedActivity.class);
+        intent.putExtra("tripId", tripId);
+        startActivity(intent);
     }
 }

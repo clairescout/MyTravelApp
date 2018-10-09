@@ -43,6 +43,10 @@ public class User {
         idToTrips.put(trip.getId(), trip);
     }
 
+    public Trip getTripById(String id) {
+        return idToTrips.get(id);
+    }
+
     private void makeFakeData() {
         Trip trip = new Trip("Jerusalem", new ArrayList<Memory>(),
                 Calendar.getInstance().getTime(), Calendar.getInstance().getTime(),
