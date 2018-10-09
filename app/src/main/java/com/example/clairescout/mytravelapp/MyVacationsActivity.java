@@ -71,7 +71,7 @@ public class MyVacationsActivity extends FragmentActivity implements OnMapReadyC
     }
 
 
-    private class VacationHolder extends RecyclerView.ViewHolder {
+    private class VacationHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView vacationName;
         private TextView startDate;
         private TextView endDate;
@@ -86,6 +86,12 @@ public class MyVacationsActivity extends FragmentActivity implements OnMapReadyC
             vacationName.setText(trip.getName());
             startDate.setText(trip.getStartDateString());
             endDate.setText(trip.getEndDateString());
+        }
+
+
+        @Override
+        public void onClick(View v) {
+
         }
     }
 

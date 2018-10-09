@@ -2,6 +2,8 @@ package com.example.models;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by clairescout on 9/25/18.
@@ -10,6 +12,7 @@ import java.util.Calendar;
 public class User {
     private static User single_instance;
     private ArrayList<Trip> trips;
+    private Map<String, Trip> idToTrips = new HashMap<>();
 
     private User() {
         trips = new ArrayList<>();
@@ -28,11 +31,16 @@ public class User {
     }
 
     public void setTrips(ArrayList<Trip> trips) {
+
         this.trips = trips;
+        for (Trip trip: trips) {
+            idToTrips.put(trip.getId(), trip);
+        }
     }
 
     public void addTrip(Trip trip) {
         trips.add(trip);
+        idToTrips.put(trip.getId(), trip);
     }
 
     private void makeFakeData() {

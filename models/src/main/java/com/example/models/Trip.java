@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -18,6 +19,7 @@ public class Trip {
     private Song song;
     private double latitude;
     private double longitude;
+    private String id;
 
 
     public Trip() {
@@ -29,6 +31,7 @@ public class Trip {
         this.startDate = startDate;
         this.endDate = endDate;
         this.song = song;
+        this.id = UUID.randomUUID().toString();
     }
 
     public String getName() {
@@ -95,5 +98,13 @@ public class Trip {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
