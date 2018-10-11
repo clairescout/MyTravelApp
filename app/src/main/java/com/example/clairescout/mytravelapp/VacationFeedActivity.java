@@ -4,20 +4,31 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.Button;
+import android.view.ViewGroup;
+import android.view.LayoutInflater;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.support.v4.app.DialogFragment;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 
 import android.util.Log;
+import java.util.List;
 
+import com.example.models.User;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
 import com.spotify.android.appremote.api.SpotifyAppRemote;
 import com.spotify.protocol.client.Subscription;
 import com.spotify.protocol.types.PlayerState;
 import com.spotify.protocol.types.Track;
+
+import presenters.VacationFeedPresenter;
+import com.example.models.Trip;
+import com.example.models.Memory;
 
 public class VacationFeedActivity extends AppCompatActivity {
 
@@ -31,14 +42,112 @@ public class VacationFeedActivity extends AppCompatActivity {
     private TextView songArtist;
     private FloatingActionButton addMediaButton;
     private Button backToVacations;
+    private RecyclerView memoryRecycler;
+    private MemoryAdapter memoryAdapter;
 
+    private String tripID;
     private boolean paused = false;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vacation_feed);
 
+        Intent intent = getIntent();
+        tripID = intent.getStringExtra("tripId");
+        VacationFeedPresenter.getInstance().setCurrentTrip(tripID);
+
         initializeWidgets();
+    }
+
+//    private class VacationHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+//        private TextView vacationName;
+//        private TextView startDate;
+//        private TextView endDate;
+//        private String tripId;
+//        public VacationHolder(@NonNull View itemView) {
+//            super(itemView);
+//            vacationName = itemView.findViewById(R.id.vacation_name);
+//            startDate = itemView.findViewById(R.id.start_date);
+//            endDate = itemView.findViewById(R.id.end_date);
+//        }
+//
+//        public void bindVacation(Trip trip) {
+//            vacationName.setText(trip.getName());
+//            startDate.setText(trip.getStartDateString());
+//            endDate.setText(trip.getEndDateString());
+//            tripId = trip.getId();
+//        }
+//
+//
+//        @Override
+//        public void onClick(View v) {
+//            goToVacationFeed(tripId);
+//        }
+//    }
+
+    private class MemoryHolder extends RecyclerView.ViewHolder {
+        private TextView text;
+
+        // TODO: check if memory is photo
+
+        public MemoryHolder(@NonNull View itemView) {
+            super(itemView);
+            text = itemView.findViewById(R.id.memory_text);
+        }
+
+        public void bindMemory(Memory memory) {
+            text.setText(memory.getText());
+        }
+    }
+
+//
+//    private class VacationAdapter extends RecyclerView.Adapter<VacationHolder> {
+//
+//        private List<Trip> trips = User.getInstance().getTrips();
+//
+//        @NonNull
+//        @Override
+//        public VacationHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+//            LayoutInflater layoutInflater = LayoutInflater.from(MyVacationsActivity.this);
+//            View view = layoutInflater.inflate(R.layout.item_vacation_in_list, viewGroup, false);
+//            return new VacationHolder(view);
+//        }
+//
+//        @Override
+//        public void onBindViewHolder(@NonNull VacationHolder vacationHolder, int i) {
+//            vacationHolder.bindVacation(trips.get(i));
+//        }
+//
+//        @Override
+//        public int getItemCount() {
+//            return trips.size();
+//        }
+//    }
+
+    private class MemoryAdapter extends RecyclerView.Adapter<MemoryHolder> {
+
+        Trip trip = User.getInstance().getTripById(tripID);
+        private List<Memory> memories = trip.getMemories();
+
+        @NonNull
+        @Override
+        public MemoryHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            LayoutInflater layoutInflater = LayoutInflater.from(VacationFeedActivity.this);
+            View view = layoutInflater.inflate(R.layout.item_memory_in_feed, viewGroup, false);
+            return new MemoryHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull MemoryHolder memoryHolder, int i) {
+            memoryHolder.bindMemory(memories.get(i));
+        }
+
+        @Override
+        public int getItemCount() {
+            return memories.size();
+        }
+
+
     }
 
     @Override
@@ -111,6 +220,18 @@ public class VacationFeedActivity extends AppCompatActivity {
             }
         });
 
+//        vacationsList = findViewById(R.id.recycler_trip_list);
+//        vacationsList.setLayoutManager(new LinearLayoutManager(this));
+
+        memoryRecycler = findViewById(R.id.vacation_feed);
+        memoryRecycler.setLayoutManager(new LinearLayoutManager(this));
+
+//        vacationAdapter = new VacationAdapter();
+//        vacationsList.setAdapter(vacationAdapter);
+
+        memoryAdapter = new MemoryAdapter();
+        memoryRecycler.setAdapter(memoryAdapter);
+
         songName = findViewById(R.id.song_name);
         songArtist = findViewById(R.id.song_artist);
 
@@ -140,6 +261,7 @@ public class VacationFeedActivity extends AppCompatActivity {
     void showDialog() {
         // Create the fragment and show it as a dialog.
         DialogFragment chooseMediaFragment = ChooseMediaFragment.newInstance();
+        ((ChooseMediaFragment) chooseMediaFragment).setTripID(tripID);
         chooseMediaFragment.show(getSupportFragmentManager(), "dialog");
     }
 

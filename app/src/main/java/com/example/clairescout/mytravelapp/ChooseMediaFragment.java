@@ -13,6 +13,7 @@ public class ChooseMediaFragment extends DialogFragment {
     private FloatingActionButton addPhotoButton;
     private FloatingActionButton addTextButton;
     private FloatingActionButton addSongButton;
+    private String tripID;
 
     static ChooseMediaFragment newInstance() {
         return new ChooseMediaFragment();
@@ -34,6 +35,7 @@ public class ChooseMediaFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AddMediaActivity.class);
+                intent.putExtra("tripId", tripID);
                 startActivity(intent);
             }
         });
@@ -42,6 +44,7 @@ public class ChooseMediaFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AddTextActivity.class);
+                intent.putExtra("tripId", tripID);
                 startActivity(intent);
             }
         });
@@ -50,9 +53,18 @@ public class ChooseMediaFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SpotifySearchActivity.class);
+                intent.putExtra("tripId", tripID);
                 startActivity(intent);
             }
         });
+    }
+
+    public void setTripID(String tripID) {
+        this.tripID = tripID;
+    }
+
+    public String getTripID() {
+        return tripID;
     }
 
 
