@@ -33,12 +33,17 @@ public class ChooseLocationActivity extends FragmentActivity implements OnMapRea
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        // put try catch around this
+        Intent intent = getIntent();
+        String tripId = intent.getStringExtra("tripId");
+        ChooseLocationPresenter.getInstance().setCurrentTrip(tripId);
+
         nextButton = findViewById(R.id.next_button);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // add check if there is no latlng yet
                 ChooseLocationPresenter.getInstance().addLatLong(new LatLng(-20.3, -20.3));
-                ChooseLocationPresenter.getInstance().addTripToUser();
                 goToVacation();
             }
         });
@@ -59,9 +64,9 @@ public class ChooseLocationActivity extends FragmentActivity implements OnMapRea
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//        LatLng sydney = new LatLng(-34, 151);
+//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
     public void goToVacation() {
