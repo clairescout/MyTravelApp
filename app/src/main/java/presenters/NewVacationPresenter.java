@@ -1,6 +1,9 @@
 package presenters;
 
 import com.example.models.Trip;
+import com.example.models.User;
+
+import java.util.Date;
 
 /**
  * Created by clairescout on 9/25/18.
@@ -18,8 +21,9 @@ public class NewVacationPresenter {
         return single_instance;
     }
 
-    public Trip createTrip(String vacationName) {
-        // TODO: add actual data to this trip
-        return new Trip();
+    public String createTrip(String vacationName, Date startDate, Date endDate) {
+        Trip trip = new Trip(vacationName, startDate, endDate);
+        User.getInstance().addTrip(trip);
+        return trip.getId();
     }
 }

@@ -34,6 +34,13 @@ public class Trip {
         this.id = UUID.randomUUID().toString();
     }
 
+    public Trip(String name, Date startDate, Date endDate){
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.id = UUID.randomUUID().toString();
+    }
+
     public String getName() {
         return name;
     }

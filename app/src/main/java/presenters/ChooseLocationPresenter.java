@@ -25,13 +25,11 @@ public class ChooseLocationPresenter {
     public void addLatLong(LatLng latlng){
         currentTrip.setLatitude(latlng.latitude);
         currentTrip.setLongitude(latlng.longitude);
-    }
-
-    public void addTripToUser(){
         User.getInstance().addTrip(currentTrip);
     }
 
-    public void setCurrentTrip(Trip trip) {
-        currentTrip = trip;
+    public void setCurrentTrip(String tripId) {
+
+        currentTrip = User.getInstance().getTripById(tripId);
     }
 }
