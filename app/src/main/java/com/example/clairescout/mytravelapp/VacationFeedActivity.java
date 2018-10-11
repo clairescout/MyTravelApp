@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.support.v4.app.DialogFragment;
 
 import android.util.Log;
 
@@ -20,7 +21,7 @@ public class VacationFeedActivity extends AppCompatActivity {
 
     private static final String CLIENT_ID = "bb32999f67d1447fa9cb9b4b74e62db5";
     private static final String REDIRECT_URI = "https://example.com/callback";
-    private String currentSongID = "37i9dQZF1DX7K31D69s4M1";
+    private String currentSongID = "1TkzittARXqOUAP9wHTJwH";
     private SpotifyAppRemote mSpotifyAppRemote;
 
     private ImageButton playButton;
@@ -68,7 +69,7 @@ public class VacationFeedActivity extends AppCompatActivity {
 
     private void connected() {
         // Play a playlist
-        mSpotifyAppRemote.getPlayerApi().play("spotify:user:spotify:playlist:" + currentSongID);
+        mSpotifyAppRemote.getPlayerApi().play("spotify:track:" + currentSongID);
 
         // Subscribe to PlayerState
         mSpotifyAppRemote.getPlayerApi()
@@ -114,7 +115,7 @@ public class VacationFeedActivity extends AppCompatActivity {
         addMediaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showDialog();
             }
         });
     }
@@ -123,6 +124,12 @@ public class VacationFeedActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         SpotifyAppRemote.CONNECTOR.disconnect(mSpotifyAppRemote);
+    }
+
+    void showDialog() {
+        // Create the fragment and show it as a dialog.
+        DialogFragment chooseMediaFragment = ChooseMediaFragment.newInstance();
+        chooseMediaFragment.show(getSupportFragmentManager(), "dialog");
     }
 
 }
