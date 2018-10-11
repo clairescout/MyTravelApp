@@ -15,7 +15,7 @@
         android:id="@+id/my_map"
         class="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="229dp"
+        android:layout_height="201dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -26,7 +26,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_trip_list"
         android:layout_width="match_parent"
-        android:layout_height="351dp"
+        android:layout_height="345dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"

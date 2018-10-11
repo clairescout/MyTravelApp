@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.models.Trip;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -12,6 +13,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import presenters.ChooseLocationPresenter;
@@ -20,9 +22,8 @@ public class ChooseLocationActivity extends FragmentActivity implements OnMapRea
 
     private GoogleMap mMap;
     Button nextButton;
-    Trip trip;
-    // TODO: when you get trip from the intent, add it to presenter
-    // TODO: should we give trips ids? then we could just pass an id and get it from the user
+    boolean chosePoint = false;
+    Marker currentMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,6 @@ public class ChooseLocationActivity extends FragmentActivity implements OnMapRea
             @Override
             public void onClick(View v) {
                 // add check if there is no latlng yet
-                ChooseLocationPresenter.getInstance().addLatLong(new LatLng(-20.3, -20.3));
                 goToVacation();
             }
         });
@@ -63,15 +63,30 @@ public class ChooseLocationActivity extends FragmentActivity implements OnMapRea
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
+            public void onMapClick(LatLng point){
+                chosePoint = true;
+                if (currentMarker != null) {
+                    currentMarker.remove();
+                }
+                currentMarker = mMap.addMarker(new MarkerOptions().position(point).title(ChooseLocationPresenter.getInstance().getTripName()));
+                ChooseLocationPresenter.getInstance().addLatLong(point);
+            }
+        });
     }
+
+
 
     public void goToVacation() {
         // should we use trip ids or something?
-        Intent intent = new Intent(this, VacationFeedActivity.class);
-        startActivity(intent);
+        if (chosePoint) {
+            Intent intent = new Intent(this, VacationFeedActivity.class);
+            intent.putExtra("tripId", ChooseLocationPresenter.getInstance().getTripId());
+            startActivity(intent);
+        } else {
+            System.out.println("in the else");
+            Toast.makeText(this, "Please choose location", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

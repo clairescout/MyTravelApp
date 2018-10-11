@@ -52,6 +52,7 @@ public class NewVacationActivity extends AppCompatActivity implements DatePicker
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // TODO: add checks for null
                 String tripId = NewVacationPresenter.getInstance().createTrip(vacationName.getText().toString(), startDateObject, endDateObject);
                 goToChooseLocation(tripId);
             }

@@ -32,4 +32,12 @@ public class ChooseLocationPresenter {
 
         currentTrip = User.getInstance().getTripById(tripId);
     }
+
+    public String getTripId(){
+        return currentTrip.getId();
+    }
+
+    public String getTripName(){
+        return currentTrip.getName();
+    }
 }

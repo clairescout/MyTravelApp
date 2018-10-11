@@ -59,6 +59,7 @@ public class MyVacationsActivity extends FragmentActivity implements OnMapReadyC
 
         // Add markers for each trip in list
         for (Trip trip : User.getInstance().getTrips()) {
+            System.out.println("adding trip");
             LatLng latlng = new LatLng(trip.getLatitude(), trip.getLongitude());
             mMap.addMarker(new MarkerOptions().position(latlng).title(trip.getName()));
         }
