@@ -89,7 +89,32 @@ public class NewVacationActivity extends AppCompatActivity implements DatePicker
 
     }
 
-    private void initializeWidgets(){
-
+    private void initializeWidgets() {
+        vacationName = findViewById(R.id.trip_name);
+        nextButton = findViewById(R.id.new_trip_next_button);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: add checks for null
+                String tripId = NewVacationPresenter.getInstance().createTrip(vacationName.getText().toString(), startDateObject, endDateObject);
+                goToChooseLocation(tripId);
+            }
+        });
+        startDate = findViewById(R.id.start_date);
+        endDate = findViewById(R.id.end_date);
+        startDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                start = true;
+                datePicker(v);
+            }
+        });
+        endDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                start = false;
+                datePicker(v);
+            }
+        });
     }
 }
