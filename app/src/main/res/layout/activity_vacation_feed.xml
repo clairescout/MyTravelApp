@@ -13,11 +13,24 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/music_bar">
 
+        <Button
+            android:layout_width="match_parent"
+            android:id="@+id/back_to_vacations_button"
+            android:layout_height="wrap_content"
+            android:text="Back To All Vacations"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:layout_margin="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="0dp"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/vacation_feed"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:layout_width="match_parent"
+            android:layout_below="@id/back_to_vacations_button"
             android:layout_height="wrap_content" />
 
         <android.support.design.widget.FloatingActionButton

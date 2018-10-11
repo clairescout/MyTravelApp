@@ -3,6 +3,7 @@ package com.example.clairescout.mytravelapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -78,6 +79,13 @@ public class MyVacationsActivity extends FragmentActivity implements OnMapReadyC
             vacationName = itemView.findViewById(R.id.vacation_name);
             startDate = itemView.findViewById(R.id.start_date);
             endDate = itemView.findViewById(R.id.end_date);
+            ConstraintLayout constraintLayout = itemView.findViewById(R.id.vacation_item_constraint);
+            constraintLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    goToVacationFeed(tripId);
+                }
+            });
         }
 
         public void bindVacation(Trip trip) {

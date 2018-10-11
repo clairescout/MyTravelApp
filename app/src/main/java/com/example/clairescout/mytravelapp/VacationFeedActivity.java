@@ -1,9 +1,11 @@
 package com.example.clairescout.mytravelapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.support.v4.app.DialogFragment;
@@ -28,6 +30,7 @@ public class VacationFeedActivity extends AppCompatActivity {
     private TextView songName;
     private TextView songArtist;
     private FloatingActionButton addMediaButton;
+    private Button backToVacations;
 
     private boolean paused = false;
 
@@ -118,6 +121,14 @@ public class VacationFeedActivity extends AppCompatActivity {
                 showDialog();
             }
         });
+
+        backToVacations = findViewById(R.id.back_to_vacations_button);
+        backToVacations.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goBackToMyVacations();
+            }
+        });
     }
 
     @Override
@@ -130,6 +141,11 @@ public class VacationFeedActivity extends AppCompatActivity {
         // Create the fragment and show it as a dialog.
         DialogFragment chooseMediaFragment = ChooseMediaFragment.newInstance();
         chooseMediaFragment.show(getSupportFragmentManager(), "dialog");
+    }
+
+    private void goBackToMyVacations() {
+        Intent intent = new Intent(this, MyVacationsActivity.class);
+        startActivity(intent);
     }
 
 }
