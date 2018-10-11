@@ -26,15 +26,6 @@ import presenters.NewVacationPresenter;
 
 public class NewVacationActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
-    /*
-
-        TODO:
-            add more data to the intent, pass the trip
-            add more data to the trip.
-            Change Button to MaterialButton
-
-     */
-
     private EditText vacationName;
     private EditText startDate;
     private EditText endDate;
@@ -47,32 +38,7 @@ public class NewVacationActivity extends AppCompatActivity implements DatePicker
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_vacation);
-        vacationName = findViewById(R.id.trip_name);
-        nextButton = findViewById(R.id.new_trip_next_button);
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: add checks for null
-                String tripId = NewVacationPresenter.getInstance().createTrip(vacationName.getText().toString(), startDateObject, endDateObject);
-                goToChooseLocation(tripId);
-            }
-        });
-        startDate = findViewById(R.id.start_date);
-        endDate = findViewById(R.id.end_date);
-        startDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                start = true;
-                datePicker(v);
-            }
-        });
-        endDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                start = false;
-                datePicker(v);
-            }
-        });
+        initializeWidgets();
     }
 
     public void goToChooseLocation(String tripId) {
@@ -120,6 +86,10 @@ public class NewVacationActivity extends AppCompatActivity implements DatePicker
                     (DatePickerDialog.OnDateSetListener)
                             getActivity(), year, month, day);
         }
+
+    }
+
+    private void initializeWidgets(){
 
     }
 }

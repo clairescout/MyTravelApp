@@ -57,8 +57,8 @@ public class User {
         Trip trip3 = new Trip("Hawaii", new ArrayList<Memory>(),
                 Calendar.getInstance().getTime(), Calendar.getInstance().getTime(),
                 new Song("Mason Jennings", "idk", "idk", "asdf"), -45, 160);
-        trips.add(trip);
-        trips.add(trip2);
-        trips.add(trip3);
+        addTrip(trip);
+        addTrip(trip2);
+        addTrip(trip3);
     }
 }

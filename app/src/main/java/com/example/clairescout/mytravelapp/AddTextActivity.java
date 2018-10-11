@@ -23,7 +23,7 @@ public class AddTextActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_text);
 
         Intent intent = getIntent();
-        String tripID = intent.getStringExtra("tripId");
+        final String tripID = intent.getStringExtra("tripId");
         AddTextPresenter.getInstance().setCurrentTrip(tripID);
 
         userEnteredText = findViewById(R.id.memory_text);
@@ -33,13 +33,14 @@ public class AddTextActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AddTextPresenter.getInstance().addTextToTrip(userEnteredText.getText().toString());
-                goToVacationFeed();
+                goToVacationFeed(tripID);
             }
         });
     }
 
-    public void goToVacationFeed() {
+    public void goToVacationFeed(String tripId) {
         Intent intent = new Intent(this, VacationFeedActivity.class);
+        intent.putExtra("tripId", tripId);
         startActivity(intent);
     }
 
