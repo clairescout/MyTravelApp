@@ -23,7 +23,12 @@
         <activity
             android:name=".VacationFeedActivity"
             android:label="@string/title_activity_vacation_feed"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".AddMediaActivity"
             android:label="@string/title_activity_add_media"
@@ -56,10 +61,6 @@
             android:name=".MyVacationsActivity"
             android:label="@string/title_activity_my_vacations"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

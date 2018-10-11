@@ -1,47 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center">
-
+    android:layout_width="300dp"
+    android:layout_height="300dp"
+    android:orientation="vertical"
+    android:gravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="15dp"
         android:gravity="center">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+        <!--<ImageButton-->
+            <!--android:id ="@+id/camera_button"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="100dp"-->
+            <!--android:background="@drawable/round_button"-->
+            <!--android:src="@drawable/camera"-->
+            <!--android:scaleType="fitCenter"-->
+            <!--android:padding="15dp"-->
+            <!--android:layout_margin="15dp"/>-->
+
+        <android.support.design.widget.FloatingActionButton
+            android:id ="@+id/camera_button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/round_button"
+            android:src="@drawable/camera"
+            android:scaleType="centerInside"
             android:padding="15dp"
-            android:gravity="center">
+            android:layout_margin="15dp"
+            android:backgroundTint="@color/colorPrimaryDark"/>
 
-            <ImageButton
-                android:id ="@+id/camera_button"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@drawable/round_button"
-                android:src="@drawable/camera"
-                android:scaleType="fitCenter"
-                android:padding="15dp"
-                android:layout_margin="15dp"/>
+        <!--<android.support.design.widget.FloatingActionButton-->
+            <!--android:id="@+id/add_media_floating_action_button"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_margin="@dimen/fab_margin"-->
+            <!--android:src="@drawable/ic_add_black_24dp" />-->
 
-            <ImageButton
-                android:id="@+id/text_button"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@drawable/round_button"
-                android:src="@drawable/text"
-                android:scaleType="fitCenter"
-                android:padding="15dp"
-                android:layout_margin="15dp"/>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/text_button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/round_button"
+            android:src="@drawable/text"
+            android:scaleType="fitCenter"
+            android:padding="15dp"
+            android:layout_margin="15dp"
+            android:backgroundTint="@color/colorPrimaryDark"/>
 
-        </LinearLayout>
+    </LinearLayout>
 
-        <ImageButton
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:gravity="center">
+
+        <android.support.design.widget.FloatingActionButton
             android:id="@+id/spotify_button"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -49,8 +71,10 @@
             android:src="@drawable/spotify"
             android:scaleType="fitCenter"
             android:padding="22dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:backgroundTint="@color/colorPrimaryDark"/>
 
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+
+</LinearLayout>
