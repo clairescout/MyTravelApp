@@ -148,7 +148,6 @@ public class MyVacationsActivity extends FragmentActivity implements OnMapReadyC
     }
 
     public void goToVacationFeed(String tripId){
-        Toast.makeText(this, "You're in the go to vacation", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, VacationFeedActivity.class);
         intent.putExtra("tripId", tripId);
         startActivity(intent);
