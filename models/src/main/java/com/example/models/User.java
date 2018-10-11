@@ -53,10 +53,10 @@ public class User {
                 new Song("Mason Jennings", "idk", "idk", "asdf"), -33.852, 151.211);
         Trip trip2 = new Trip("Jordan", new ArrayList<Memory>(),
                 Calendar.getInstance().getTime(), Calendar.getInstance().getTime(),
-                new Song("Mason Jennings", "idk", "idk", "asdf"), -20.2, -35.5);
+                new Song("Mason Jennings", "idk", "idk", "asdf"), -28, 140.2);
         Trip trip3 = new Trip("Hawaii", new ArrayList<Memory>(),
                 Calendar.getInstance().getTime(), Calendar.getInstance().getTime(),
-                new Song("Mason Jennings", "idk", "idk", "asdf"), 76.2, 151.211);
+                new Song("Mason Jennings", "idk", "idk", "asdf"), -45, 160);
         trips.add(trip);
         trips.add(trip2);
         trips.add(trip3);
