@@ -23,7 +23,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/trip_name"
+        android:id="@+id/photo_caption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:color="@color/colorPrimary"

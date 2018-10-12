@@ -71,6 +71,9 @@ public class VacationFeedActivity extends AppCompatActivity {
 
         public void bindMemory(Memory memory) {
             text.setText(memory.getText());
+            if (memory instanceof Photo) {
+                System.out.println("photo");
+            }
         }
     }
 
@@ -208,8 +211,8 @@ public class VacationFeedActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
+        super.onStop();
         if (currentSongID != null) {
-            super.onStop();
             pauseMusic();
             SpotifyAppRemote.CONNECTOR.disconnect(mSpotifyAppRemote);
         } else {
