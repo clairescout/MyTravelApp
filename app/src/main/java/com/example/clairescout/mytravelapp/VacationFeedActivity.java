@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.LayoutInflater;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.ImageView;
 import android.support.v4.app.DialogFragment;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -63,16 +64,18 @@ public class VacationFeedActivity extends AppCompatActivity {
 
     private class MemoryHolder extends RecyclerView.ViewHolder {
         private TextView text;
+        private ImageView image;
 
         public MemoryHolder(@NonNull View itemView) {
             super(itemView);
             text = itemView.findViewById(R.id.memory_text);
+            image = itemView.findViewById(R.id.memory_photo);
         }
 
         public void bindMemory(Memory memory) {
             text.setText(memory.getText());
             if (memory instanceof Photo) {
-                System.out.println("photo");
+                image.setImageResource(R.drawable.templemount);
             }
         }
     }
