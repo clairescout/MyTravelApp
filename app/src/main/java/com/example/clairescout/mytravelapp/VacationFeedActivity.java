@@ -212,6 +212,8 @@ public class VacationFeedActivity extends AppCompatActivity {
             super.onStop();
             pauseMusic();
             SpotifyAppRemote.CONNECTOR.disconnect(mSpotifyAppRemote);
+        } else {
+            super.onStop();
         }
     }
 
