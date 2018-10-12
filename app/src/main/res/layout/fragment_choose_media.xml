@@ -13,46 +13,47 @@
         android:padding="15dp"
         android:gravity="center">
 
-        <!--<ImageButton-->
-            <!--android:id ="@+id/camera_button"-->
-            <!--android:layout_width="100dp"-->
-            <!--android:layout_height="100dp"-->
-            <!--android:background="@drawable/round_button"-->
-            <!--android:src="@drawable/camera"-->
-            <!--android:scaleType="fitCenter"-->
-            <!--android:padding="15dp"-->
-            <!--android:layout_margin="15dp"/>-->
-
-        <android.support.design.widget.FloatingActionButton
+        <ImageButton
             android:id ="@+id/camera_button"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@drawable/round_button"
             android:src="@drawable/camera"
-            android:scaleType="centerInside"
+            android:scaleType="fitCenter"
             android:padding="15dp"
-            android:layout_margin="15dp"
-            android:backgroundTint="@color/colorPrimaryDark"/>
+            android:layout_margin="15dp"/>
 
         <!--<android.support.design.widget.FloatingActionButton-->
-            <!--android:id="@+id/add_media_floating_action_button"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_margin="@dimen/fab_margin"-->
-            <!--android:src="@drawable/ic_add_black_24dp" />-->
+            <!--android:id ="@+id/camera_button"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="100dp"-->
+            <!--android:background="@drawable/round_button"-->
+            <!--android:src="@drawable/camera"-->
+            <!--android:scaleType="centerInside"-->
+            <!--android:padding="15dp"-->
+            <!--android:layout_margin="15dp"-->
+            <!--android:backgroundTint="@color/colorPrimaryDark"/>-->
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/text_button"
+        <ImageButton
+            android:id ="@+id/text_button"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@drawable/round_button"
             android:src="@drawable/text"
             android:scaleType="fitCenter"
             android:padding="15dp"
-            android:layout_margin="15dp"
-            android:backgroundTint="@color/colorPrimaryDark"/>
+            android:layout_margin="15dp"/>
+
+        <!--<android.support.design.widget.FloatingActionButton-->
+            <!--android:id="@+id/text_button"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="100dp"-->
+            <!--android:background="@drawable/round_button"-->
+            <!--android:src="@drawable/text"-->
+            <!--android:scaleType="fitCenter"-->
+            <!--android:padding="15dp"-->
+            <!--android:layout_margin="15dp"-->
+            <!--android:backgroundTint="@color/colorPrimaryDark"/>-->
 
     </LinearLayout>
 
@@ -63,16 +64,26 @@
         android:padding="15dp"
         android:gravity="center">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/spotify_button"
+        <ImageButton
+            android:id ="@+id/spotify_button"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@drawable/round_button"
             android:src="@drawable/spotify"
             android:scaleType="fitCenter"
-            android:padding="22dp"
-            android:gravity="center"
-            android:backgroundTint="@color/colorPrimaryDark"/>
+            android:padding="15dp"
+            android:layout_margin="15dp"/>
+
+        <!--<android.support.design.widget.FloatingActionButton-->
+            <!--android:id="@+id/spotify_button"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="100dp"-->
+            <!--android:background="@drawable/round_button"-->
+            <!--android:src="@drawable/spotify"-->
+            <!--android:scaleType="fitCenter"-->
+            <!--android:padding="22dp"-->
+            <!--android:gravity="center"-->
+            <!--android:backgroundTint="@color/colorPrimaryDark"/>-->
 
     </LinearLayout>
 

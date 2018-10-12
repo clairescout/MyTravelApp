@@ -96,7 +96,7 @@
             android:layout_alignParentRight="true"
             android:paddingTop="4dp"
             android:background="@null"
-            android:src="@drawable/pause_accent" />
+            android:src="@drawable/play_accent" />
 
     </RelativeLayout>
 

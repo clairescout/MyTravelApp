@@ -43,7 +43,7 @@
         android:color="@color/colorPrimary"
         android:inputType="text|textPersonName"
         android:shadowColor="@color/colorPrimary"
-        android:text="@string/journal_entry"
+        android:hint="@string/journal_entry"
         android:textColor="@color/colorPrimary"
         android:textColorHint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"

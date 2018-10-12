@@ -19,6 +19,7 @@ import android.util.Log;
 import java.util.List;
 
 import com.example.models.User;
+import com.example.models.Photo;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
 import com.spotify.android.appremote.api.SpotifyAppRemote;
@@ -34,7 +35,7 @@ public class VacationFeedActivity extends AppCompatActivity {
 
     private static final String CLIENT_ID = "bb32999f67d1447fa9cb9b4b74e62db5";
     private static final String REDIRECT_URI = "https://example.com/callback";
-    private String currentSongID = "1TkzittARXqOUAP9wHTJwH";
+    private String currentSongID;
     private SpotifyAppRemote mSpotifyAppRemote;
 
     private ImageButton playButton;
@@ -46,49 +47,22 @@ public class VacationFeedActivity extends AppCompatActivity {
     private MemoryAdapter memoryAdapter;
 
     private String tripID;
-    private boolean paused = false;
+    private boolean paused = true;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vacation_feed);
 
         Intent intent = getIntent();
+        currentSongID = intent.getStringExtra("currentSongId"); // Not positive if this will work...
         tripID = intent.getStringExtra("tripId");
         VacationFeedPresenter.getInstance().setCurrentTrip(tripID);
 
         initializeWidgets();
     }
 
-//    private class VacationHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-//        private TextView vacationName;
-//        private TextView startDate;
-//        private TextView endDate;
-//        private String tripId;
-//        public VacationHolder(@NonNull View itemView) {
-//            super(itemView);
-//            vacationName = itemView.findViewById(R.id.vacation_name);
-//            startDate = itemView.findViewById(R.id.start_date);
-//            endDate = itemView.findViewById(R.id.end_date);
-//        }
-//
-//        public void bindVacation(Trip trip) {
-//            vacationName.setText(trip.getName());
-//            startDate.setText(trip.getStartDateString());
-//            endDate.setText(trip.getEndDateString());
-//            tripId = trip.getId();
-//        }
-//
-//
-//        @Override
-//        public void onClick(View v) {
-//            goToVacationFeed(tripId);
-//        }
-//    }
-
     private class MemoryHolder extends RecyclerView.ViewHolder {
         private TextView text;
-
-        // TODO: check if memory is photo
 
         public MemoryHolder(@NonNull View itemView) {
             super(itemView);
@@ -99,30 +73,6 @@ public class VacationFeedActivity extends AppCompatActivity {
             text.setText(memory.getText());
         }
     }
-
-//
-//    private class VacationAdapter extends RecyclerView.Adapter<VacationHolder> {
-//
-//        private List<Trip> trips = User.getInstance().getTrips();
-//
-//        @NonNull
-//        @Override
-//        public VacationHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-//            LayoutInflater layoutInflater = LayoutInflater.from(MyVacationsActivity.this);
-//            View view = layoutInflater.inflate(R.layout.item_vacation_in_list, viewGroup, false);
-//            return new VacationHolder(view);
-//        }
-//
-//        @Override
-//        public void onBindViewHolder(@NonNull VacationHolder vacationHolder, int i) {
-//            vacationHolder.bindVacation(trips.get(i));
-//        }
-//
-//        @Override
-//        public int getItemCount() {
-//            return trips.size();
-//        }
-//    }
 
     private class MemoryAdapter extends RecyclerView.Adapter<MemoryHolder> {
 
@@ -139,12 +89,17 @@ public class VacationFeedActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull MemoryHolder memoryHolder, int i) {
-            memoryHolder.bindMemory(memories.get(i));
+            if (memories != null) {
+                memoryHolder.bindMemory(memories.get(i));
+            }
         }
 
         @Override
         public int getItemCount() {
-            return memories.size();
+            if (memories != null) {
+                return memories.size();
+            }
+            return 0;
         }
 
 
@@ -181,7 +136,10 @@ public class VacationFeedActivity extends AppCompatActivity {
 
     private void connected() {
         // Play a playlist
-        mSpotifyAppRemote.getPlayerApi().play("spotify:track:" + currentSongID);
+        if (currentSongID != null) {
+            mSpotifyAppRemote.getPlayerApi().play("spotify:track:" + currentSongID);
+            pauseMusic();
+        }
 
         // Subscribe to PlayerState
         mSpotifyAppRemote.getPlayerApi()
@@ -199,7 +157,9 @@ public class VacationFeedActivity extends AppCompatActivity {
     }
 
     private void pauseMusic() {
-        mSpotifyAppRemote.getPlayerApi().pause();
+        if (currentSongID != null) {
+            mSpotifyAppRemote.getPlayerApi().pause();
+        }
     }
 
     private void initializeWidgets() {
@@ -220,14 +180,8 @@ public class VacationFeedActivity extends AppCompatActivity {
             }
         });
 
-//        vacationsList = findViewById(R.id.recycler_trip_list);
-//        vacationsList.setLayoutManager(new LinearLayoutManager(this));
-
         memoryRecycler = findViewById(R.id.vacation_feed);
         memoryRecycler.setLayoutManager(new LinearLayoutManager(this));
-
-//        vacationAdapter = new VacationAdapter();
-//        vacationsList.setAdapter(vacationAdapter);
 
         memoryAdapter = new MemoryAdapter();
         memoryRecycler.setAdapter(memoryAdapter);
@@ -254,8 +208,11 @@ public class VacationFeedActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-        super.onStop();
-        SpotifyAppRemote.CONNECTOR.disconnect(mSpotifyAppRemote);
+        if (currentSongID != null) {
+            super.onStop();
+            pauseMusic();
+            SpotifyAppRemote.CONNECTOR.disconnect(mSpotifyAppRemote);
+        }
     }
 
     void showDialog() {
@@ -266,6 +223,9 @@ public class VacationFeedActivity extends AppCompatActivity {
     }
 
     private void goBackToMyVacations() {
+        if (currentSongID != null) {
+            pauseMusic();
+        }
         Intent intent = new Intent(this, MyVacationsActivity.class);
         startActivity(intent);
     }

@@ -2,6 +2,7 @@ package com.example.clairescout.mytravelapp;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.widget.ImageButton;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -10,9 +11,12 @@ import android.os.Bundle;
 
 public class ChooseMediaFragment extends DialogFragment {
 
-    private FloatingActionButton addPhotoButton;
-    private FloatingActionButton addTextButton;
-    private FloatingActionButton addSongButton;
+//    private FloatingActionButton addPhotoButton;
+//    private FloatingActionButton addTextButton;
+//    private FloatingActionButton addSongButton;
+    private ImageButton addPhotoButton;
+    private ImageButton addTextButton;
+    private ImageButton addSongButton;
     private String tripID;
 
     static ChooseMediaFragment newInstance() {
