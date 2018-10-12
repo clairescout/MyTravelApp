@@ -53,8 +53,8 @@ public class SpotifySearchActivity extends AppCompatActivity {
         public SongHolder(@NonNull View itemView) {
             super(itemView);
 //            albumImage = itemView.findViewById(R.id.album_image);
-            songTitle = itemView.findViewById(R.id.song_name);
-            artist = itemView.findViewById(R.id.song_artist);
+            songTitle = itemView.findViewById(R.id.song_title);
+            artist = itemView.findViewById(R.id.artist);
             albumTitle = itemView.findViewById(R.id.album);
         }
 
