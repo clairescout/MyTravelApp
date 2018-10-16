@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,7 +44,7 @@ public class SpotifySearchActivity extends AppCompatActivity {
         initializeWidgets();
     }
 
-    private class SongHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private class SongHolder extends RecyclerView.ViewHolder {
 
 //        private ImageView albumImage;
         private TextView songTitle;
@@ -65,17 +66,17 @@ public class SpotifySearchActivity extends AppCompatActivity {
             albumTitle.setText(song.getAlbum());
         }
 
-        @Override
-        public void onClick(View v) {
-            String songName = songTitle.getText().toString();
-            String artistName = artist.getText().toString();
-            String albumName = albumTitle.getText().toString();
-            String id = "1TkzittARXqOUAP9wHTJwH"; // TODO: get actual id from Spotify API, this is just the Places ID
-
-            SpotifySearchPresenter.getInstance().addSongToTrip(songName, artistName, albumName, id);
-
-            goToVacationFeed(tripID);
-        }
+//        @Override
+//        public void onClick(View v) {
+//            String songName = songTitle.getText().toString();
+//            String artistName = artist.getText().toString();
+//            String albumName = albumTitle.getText().toString();
+//            String id = "1TkzittARXqOUAP9wHTJwH"; // TODO: get actual id from Spotify API, this is just the Places ID
+//
+//            SpotifySearchPresenter.getInstance().addSongToTrip(songName, artistName, albumName, id);
+//
+//            goToVacationFeed(tripID);
+//        }
     }
 
     private class SongAdapter extends RecyclerView.Adapter<SongHolder> {
@@ -92,7 +93,21 @@ public class SpotifySearchActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull SongHolder songHolder, int i) {
-            songHolder.bindSong(songs.get(i));
+            final Song song = songs.get(i);
+            songHolder.bindSong(song);
+            songHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String songName = song.getName();
+                    String artistName = song.getArtist();
+                    String albumName = song.getAlbum();
+                    String id = "1TkzittARXqOUAP9wHTJwH"; // TODO: get actual id from Spotify API, this is just the Places ID
+
+                    SpotifySearchPresenter.getInstance().addSongToTrip(songName, artistName, albumName, id);
+
+                    goToVacationFeed(tripID, song.getId());
+                }
+            });
         }
 
         @Override
@@ -116,9 +131,10 @@ public class SpotifySearchActivity extends AppCompatActivity {
         songsRecyclerView.setAdapter(songAdapter);
     }
 
-    public void goToVacationFeed(String tripId) {
+    public void goToVacationFeed(String tripId, String songId) {
         Intent intent = new Intent(this, VacationFeedActivity.class);
         intent.putExtra("tripId", tripId);
+        intent.putExtra("currentSongId", songId);
         startActivity(intent);
     }
 

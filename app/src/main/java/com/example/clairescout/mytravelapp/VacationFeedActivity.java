@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ImageView;
 import android.support.v4.app.DialogFragment;
@@ -43,19 +44,27 @@ public class VacationFeedActivity extends AppCompatActivity {
     private TextView songName;
     private TextView songArtist;
     private FloatingActionButton addMediaButton;
+    private FloatingActionButton addPhotoButton;
+    private FloatingActionButton addTextButton;
+    private FloatingActionButton addSongButton;
     private Button backToVacations;
     private RecyclerView memoryRecycler;
     private MemoryAdapter memoryAdapter;
 
     private String tripID;
     private boolean paused = true;
+    private boolean actionButtonsHidden = true;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vacation_feed);
 
         Intent intent = getIntent();
-        currentSongID = intent.getStringExtra("currentSongId"); // Not positive if this will work...
+        currentSongID = intent.getStringExtra("currentSongId");
+        if (currentSongID != null) {
+            RelativeLayout musicBar = findViewById(R.id.music_bar);
+            musicBar.setVisibility(View.VISIBLE);
+        }
         tripID = intent.getStringExtra("tripId");
         VacationFeedPresenter.getInstance().setCurrentTrip(tripID);
 
@@ -113,6 +122,7 @@ public class VacationFeedActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
+        System.out.println("onStart method");
         super.onStart();
         ConnectionParams connectionParams =
                 new ConnectionParams.Builder(CLIENT_ID)
@@ -128,12 +138,14 @@ public class VacationFeedActivity extends AppCompatActivity {
                         Log.d("VacationFeedActivity", "Connected! Yay!");
 
                         // Now you can start interacting with App Remote
+                        System.out.println("onStart, soon to be connected");
                         connected();
 
                     }
 
                     public void onFailure(Throwable throwable) {
                         Log.e("MyActivity", throwable.getMessage(), throwable);
+                        System.out.println("spotify failed");
 
                         // Something went wrong when attempting to connect! Handle errors here
                     }
@@ -143,6 +155,7 @@ public class VacationFeedActivity extends AppCompatActivity {
     private void connected() {
         // Play a playlist
         if (currentSongID != null) {
+            System.out.println("connected if statement");
             mSpotifyAppRemote.getPlayerApi().play("spotify:track:" + currentSongID);
             pauseMusic();
         }
@@ -195,11 +208,44 @@ public class VacationFeedActivity extends AppCompatActivity {
         songName = findViewById(R.id.song_name);
         songArtist = findViewById(R.id.song_artist);
 
+        addPhotoButton = findViewById(R.id.camera_button);
+        addPhotoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToAddMediaActivity();
+            }
+        });
+        addTextButton = findViewById(R.id.text_button);
+        addTextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToAddTextActivity();
+            }
+        });
+        addSongButton = findViewById(R.id.spotify_button);
+        addSongButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToAddSongActivity();
+            }
+        });
+
         addMediaButton = findViewById(R.id.add_media_floating_action_button);
         addMediaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog();
+                if (actionButtonsHidden) {
+                    actionButtonsHidden = false;
+                    findViewById(R.id.camera_button).setVisibility(View.VISIBLE);
+                    findViewById(R.id.text_button).setVisibility(View.VISIBLE);
+                    findViewById(R.id.spotify_button).setVisibility(View.VISIBLE);
+                }
+                else {
+                    actionButtonsHidden = true;
+                    findViewById(R.id.camera_button).setVisibility(View.GONE);
+                    findViewById(R.id.text_button).setVisibility(View.GONE);
+                    findViewById(R.id.spotify_button).setVisibility(View.GONE);
+                }
             }
         });
 
@@ -237,5 +283,24 @@ public class VacationFeedActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MyVacationsActivity.class);
         startActivity(intent);
     }
+
+    private void goToAddMediaActivity() {
+        Intent intent = new Intent(this, AddMediaActivity.class);
+        intent.putExtra("tripId", tripID);
+        startActivity(intent);
+    }
+
+    private void goToAddTextActivity() {
+        Intent intent = new Intent(this, AddTextActivity.class);
+        intent.putExtra("tripId", tripID);
+        startActivity(intent);
+    }
+
+    private void goToAddSongActivity() {
+        Intent intent = new Intent(this, SpotifySearchActivity.class);
+        intent.putExtra("tripId", tripID);
+        startActivity(intent);
+    }
+
 
 }
