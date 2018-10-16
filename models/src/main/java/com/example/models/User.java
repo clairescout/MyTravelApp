@@ -39,8 +39,12 @@ public class User {
     }
 
     public void addTrip(Trip trip) {
-        trips.add(trip);
-        idToTrips.put(trip.getId(), trip);
+        if (idToTrips.containsKey(trip.getId())) {
+            idToTrips.put(trip.getId(), trip);
+        } else {
+            trips.add(trip);
+            idToTrips.put(trip.getId(), trip);
+        }
     }
 
     public Trip getTripById(String id) {
