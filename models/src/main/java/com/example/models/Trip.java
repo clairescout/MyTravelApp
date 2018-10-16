@@ -3,7 +3,9 @@ package com.example.models;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 
@@ -20,6 +22,7 @@ public class Trip {
     private double latitude;
     private double longitude;
     private String id;
+    private Map<String, Memory> idToMemory = new HashMap<>();
 
 
     public Trip() {
@@ -32,6 +35,7 @@ public class Trip {
         this.endDate = endDate;
         this.song = song;
         this.id = UUID.randomUUID().toString();
+        memoriesToMap();
     }
 
     public Trip(String name, Date startDate, Date endDate){
@@ -77,6 +81,15 @@ public class Trip {
         return song;
     }
 
+    public void addMemory(Memory memory) {
+        if (idToMemory.containsKey(memory.getId())){
+            idToMemory.put(memory.getId(), memory);
+        } else {
+            memories.add(memory);
+            idToMemory.put(memory.getId(), memory);
+        }
+    }
+
     public void setSong(Song song) {
         this.song = song;
     }
@@ -113,5 +126,15 @@ public class Trip {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    private void memoriesToMap() {
+        for (Memory memory : memories) {
+            idToMemory.put(memory.getId(), memory);
+        }
+    }
+
+    public Memory getMemoryById(String id){
+        return idToMemory.get(id);
     }
 }

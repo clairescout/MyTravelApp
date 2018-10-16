@@ -1,5 +1,6 @@
 package presenters;
 
+import com.example.models.Photo;
 import com.example.models.Trip;
 import com.example.models.User;
 
@@ -27,6 +28,10 @@ public class VacationFeedPresenter {
 
     public String getTripName(){
         return currentTrip.getName();
+    }
+
+    public void addPhoto(Photo photo){
+        currentTrip.addMemory(photo);
     }
 
 }

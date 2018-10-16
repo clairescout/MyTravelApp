@@ -1,7 +1,13 @@
 package com.example.clairescout.mytravelapp;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +24,11 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
 import android.util.Log;
+import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import com.example.models.User;
@@ -29,6 +40,7 @@ import com.spotify.protocol.client.Subscription;
 import com.spotify.protocol.types.PlayerState;
 import com.spotify.protocol.types.Track;
 
+import presenters.ChooseMediaPresenter;
 import presenters.VacationFeedPresenter;
 import com.example.models.Trip;
 import com.example.models.Memory;
@@ -54,6 +66,7 @@ public class VacationFeedActivity extends AppCompatActivity {
     private String tripID;
     private boolean paused = true;
     private boolean actionButtonsHidden = true;
+    public static final int GET_FROM_GALLERY = 3;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +97,9 @@ public class VacationFeedActivity extends AppCompatActivity {
         public void bindMemory(Memory memory) {
             text.setText(memory.getText());
             if (memory instanceof Photo) {
-                image.setImageResource(R.drawable.templemount);
+                // image.setImageResource(R.drawable.templemount);
+                Bitmap compressedBitmap = BitmapFactory.decodeByteArray(((Photo) memory).getByteArray(),0,((Photo) memory).getByteArray().length);
+                image.setImageBitmap(compressedBitmap);
             }
         }
     }
@@ -285,9 +300,10 @@ public class VacationFeedActivity extends AppCompatActivity {
     }
 
     private void goToAddMediaActivity() {
-        Intent intent = new Intent(this, AddMediaActivity.class);
-        intent.putExtra("tripId", tripID);
-        startActivity(intent);
+//        Intent intent = new Intent(this, AddMediaActivity.class);
+//        intent.putExtra("tripId", tripID);
+//        startActivity(intent);
+        startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
     }
 
     private void goToAddTextActivity() {
@@ -301,6 +317,42 @@ public class VacationFeedActivity extends AppCompatActivity {
         intent.putExtra("tripId", tripID);
         startActivity(intent);
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        //Detects request codes
+        if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
+            Uri selectedImage = data.getData();
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
+                // Toast.makeText(this, "Uploading Image", Toast.LENGTH_LONG).show();
+                Bitmap resized = Bitmap.createScaledBitmap(bitmap,(int)(bitmap.getWidth()*0.2), (int)(bitmap.getHeight()*0.2), true);
+                resized.compress(Bitmap.CompressFormat.PNG, 30, stream);
+                Photo photo = new Photo();
+                photo.setByteArray(stream.toByteArray());
+                VacationFeedPresenter.getInstance().addPhoto(photo);
+                Intent intent = new Intent(this, AddMediaActivity.class);
+                intent.putExtra("tripId", tripID);
+                intent.putExtra("photoId", photo.getId());
+                startActivity(intent);
+                // TODO: send image to the next activity
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 
 
 }

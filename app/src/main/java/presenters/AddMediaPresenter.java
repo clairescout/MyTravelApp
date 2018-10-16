@@ -12,6 +12,7 @@ public class AddMediaPresenter {
 
     private static AddMediaPresenter single_instance = new AddMediaPresenter();
     private Trip currentTrip;
+    private Photo currentPhoto;
 
     private AddMediaPresenter() {
 
@@ -30,19 +31,32 @@ public class AddMediaPresenter {
     }
 
     public void addMediaToTrip(String textEntry) {
+        currentPhoto.setText(textEntry);
+        currentTrip.addMemory(currentPhoto);
 
-        Photo photo = new Photo(textEntry, "");
+//        Photo photo = new Photo(textEntry, "");
+//
+//        List<Memory> currMemories = currentTrip.getMemories();
+//        if (currMemories == null) {
+//            ArrayList<Memory> memories = new ArrayList<>();
+//            memories.add(photo);
+//            currentTrip.setMemories(memories);
+//        }
+//        else {
+//            currMemories.add(photo);
+//        }
 
-        List<Memory> currMemories = currentTrip.getMemories();
-        if (currMemories == null) {
-            ArrayList<Memory> memories = new ArrayList<>();
-            memories.add(photo);
-            currentTrip.setMemories(memories);
+
+    }
+
+    public byte[] getCurrentPhotoBytes(String photoId) {
+        Memory memory = currentTrip.getMemoryById(photoId);
+        if (memory.getClass() == Photo.class) {
+            currentPhoto = (Photo) memory;
+            return currentPhoto.getByteArray();
         }
-        else {
-            currMemories.add(photo);
-        }
-
+        // TODO: throw error
+        else return new byte[0];
     }
 
 }
