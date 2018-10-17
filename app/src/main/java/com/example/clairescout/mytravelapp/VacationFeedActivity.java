@@ -170,7 +170,6 @@ public class VacationFeedActivity extends AppCompatActivity {
     private void connected() {
         // Play a playlist
         if (currentSongID != null) {
-            System.out.println("connected if statement");
             mSpotifyAppRemote.getPlayerApi().play("spotify:track:" + currentSongID);
             pauseMusic();
         }

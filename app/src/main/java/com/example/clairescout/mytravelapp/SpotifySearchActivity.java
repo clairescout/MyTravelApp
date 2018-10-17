@@ -3,27 +3,21 @@ package com.example.clairescout.mytravelapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.models.Song;
-import com.example.models.Trip;
-import com.example.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
 
-import presenters.AddTextPresenter;
 import presenters.SpotifySearchPresenter;
 
 public class SpotifySearchActivity extends AppCompatActivity {
@@ -31,6 +25,7 @@ public class SpotifySearchActivity extends AppCompatActivity {
     private RecyclerView songsRecyclerView;
     private SongAdapter songAdapter;
     private String tripID;
+    private HashMap<String, Integer> albumCovers = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,37 +41,26 @@ public class SpotifySearchActivity extends AppCompatActivity {
 
     private class SongHolder extends RecyclerView.ViewHolder {
 
-//        private ImageView albumImage;
+        private ImageView albumImage;
         private TextView songTitle;
         private TextView artist;
         private TextView albumTitle;
 
         public SongHolder(@NonNull View itemView) {
             super(itemView);
-//            albumImage = itemView.findViewById(R.id.album_image);
+            albumImage = itemView.findViewById(R.id.album_image);
             songTitle = itemView.findViewById(R.id.song_title);
             artist = itemView.findViewById(R.id.artist);
             albumTitle = itemView.findViewById(R.id.album);
         }
 
         public void bindSong(Song song) {
-           //  albumImage.setImageDrawable(song.get); TODO: don't know how to do this
+            int albumCover = albumCovers.get(song.getAlbum());
+            albumImage.setImageResource(albumCover);
             songTitle.setText(song.getName());
             artist.setText(song.getArtist());
             albumTitle.setText(song.getAlbum());
         }
-
-//        @Override
-//        public void onClick(View v) {
-//            String songName = songTitle.getText().toString();
-//            String artistName = artist.getText().toString();
-//            String albumName = albumTitle.getText().toString();
-//            String id = "1TkzittARXqOUAP9wHTJwH"; // TODO: get actual id from Spotify API, this is just the Places ID
-//
-//            SpotifySearchPresenter.getInstance().addSongToTrip(songName, artistName, albumName, id);
-//
-//            goToVacationFeed(tripID);
-//        }
     }
 
     private class SongAdapter extends RecyclerView.Adapter<SongHolder> {
@@ -117,18 +101,49 @@ public class SpotifySearchActivity extends AppCompatActivity {
 
         public ArrayList<Song> makeTempSongs() {
             ArrayList<Song> songs = new ArrayList<>();
-            Song song = new Song("The National Parks", "Places", "Places", "1TkzittARXqOUAP9wHTJwH");
-            songs.add(song);
+            Song places = new Song("The National Parks", "Places", "Places", "1TkzittARXqOUAP9wHTJwH");
+            songs.add(places);
+
+            Song holiday = new Song("Vampire Weekend", "Holiday", "Contra", "3ciC6GP8rOPxlkCYQIQ3jW");
+            songs.add(holiday);
+
+            Song drive = new Song("Ben Rector", "Drive", "Magic", "1Yqovy9hlOeV91IY3Bhcf2");
+            songs.add(drive);
+
+            Song lostInParis = new Song("Tom Misch", "Lost in Paris", "Geography", "6lxcWIvMQK3yezxwFfZcKZ");
+            songs.add(lostInParis);
+
+            Song africa = new Song("Toto", "Africa", "Toto IV", "2374M0fQpWi3dLnB54qaLX");
+            songs.add(africa);
+
+//            Song budapest = new Song("George Ezra", "Budapest", "Wanted on Voyage", "7q0aQpiLv5tIsupcgQ3Ny4");
+//            songs.add(budapest);
+
+//            Song portugal = new Song("WALK THE MOON", "Portugal", "TALKING IS HARD", "3MYWKl8ScgDu3sAvyneMCG");
+//            songs.add(portugal);
+
             return songs;
         }
     }
 
     public void initializeWidgets() {
+        makeAlbumMap();
+
         songsRecyclerView = findViewById(R.id.spotify_song_recycler);
         songsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         songAdapter = new SongAdapter();
         songsRecyclerView.setAdapter(songAdapter);
+    }
+
+    public void makeAlbumMap() {
+        albumCovers.put("Places", R.drawable.places);
+        albumCovers.put("Contra", R.drawable.contra);
+        albumCovers.put("Magic", R.drawable.magic);
+        albumCovers.put("Geography", R.drawable.geography);
+        albumCovers.put("Toto IV", R.drawable.toto);
+//        albumCovers.put("Wanted On Voyage", R.drawable.wanted_on_voyage);
+//        albumCovers.put("TALKING IS HARD", R.drawable.talking_is_hard);
     }
 
     public void goToVacationFeed(String tripId, String songId) {
