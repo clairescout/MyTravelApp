@@ -2,6 +2,7 @@ package com.example.models;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +43,7 @@ public class Trip {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.memories = new ArrayList<>();
         this.id = UUID.randomUUID().toString();
     }
 

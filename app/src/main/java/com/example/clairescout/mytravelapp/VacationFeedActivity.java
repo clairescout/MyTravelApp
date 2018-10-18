@@ -11,6 +11,8 @@ import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.view.ViewGroup;
@@ -25,6 +27,7 @@ import android.support.v7.widget.RecyclerView;
 
 import android.util.Log;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -59,9 +62,9 @@ public class VacationFeedActivity extends AppCompatActivity {
     private FloatingActionButton addPhotoButton;
     private FloatingActionButton addTextButton;
     private FloatingActionButton addSongButton;
-    private Button backToVacations;
     private RecyclerView memoryRecycler;
     private MemoryAdapter memoryAdapter;
+    private TextView title;
 
     private String tripID;
     private boolean paused = true;
@@ -263,13 +266,17 @@ public class VacationFeedActivity extends AppCompatActivity {
             }
         });
 
-        backToVacations = findViewById(R.id.back_to_vacations_button);
-        backToVacations.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goBackToMyVacations();
-            }
-        });
+        android.support.v7.widget.Toolbar myToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        title = findViewById(R.id.toolbar_title);
+        title.setText(User.getInstance().getTripById(tripID).getName());
+//        myToolbar.setTitleTextColor(0xFFFFFFFF);
+//        getSupportActionBar().setTitle(User.getInstance().getTripById(tripID).getName());
+
     }
 
     @Override
@@ -349,6 +356,18 @@ public class VacationFeedActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MyVacationsActivity.class);
+        startActivity(intent);
     }
 
 

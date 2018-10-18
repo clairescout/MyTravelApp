@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,12 +27,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.List;
 
 
-public class MyVacationsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MyVacationsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private RecyclerView vacationsList;
     private VacationAdapter vacationAdapter;
     private FloatingActionButton addVacationButton;
+    private TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +141,14 @@ public class MyVacationsActivity extends FragmentActivity implements OnMapReadyC
 
         vacationAdapter = new VacationAdapter();
         vacationsList.setAdapter(vacationAdapter);
+
+        android.support.v7.widget.Toolbar myToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.my_vacations_toolbar);
+
+        setSupportActionBar(myToolbar);
+
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        title = findViewById(R.id.my_vacations_title);
+        title.setText("My Vacations");
     }
 
     public void goToNewVacationActivity() {

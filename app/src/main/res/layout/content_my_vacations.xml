@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:map="http://schemas.android.com/apk/res-auto"
@@ -11,6 +18,28 @@
     android:background="#F0F0F0">
 
 
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_vacations_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:theme="@style/ToolbarColoredBackArrow"
+        app:popupTheme="@style/AppTheme"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+        <TextView
+            android:id="@+id/my_vacations_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Toolbar Title"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+    </android.support.v7.widget.Toolbar>
+
     <fragment
         android:id="@+id/my_map"
         class="com.google.android.gms.maps.SupportMapFragment"
@@ -21,7 +50,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/my_vacations_toolbar" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_trip_list"
@@ -40,3 +69,6 @@
 
 
 </android.support.constraint.ConstraintLayout>
+
+
+</ScrollView>

@@ -7,30 +7,40 @@
     android:fitsSystemWindows="true"
     tools:context="com.example.clairescout.mytravelapp.VacationFeedActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:theme="@style/ToolbarColoredBackArrow"
+        app:popupTheme="@style/AppTheme"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Toolbar Title"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
+
+    </android.support.v7.widget.Toolbar>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/music_bar">
-
-        <Button
-            android:layout_width="match_parent"
-            android:id="@+id/back_to_vacations_button"
-            android:layout_height="wrap_content"
-            android:text="Back To All Vacations"
-            android:background="@color/colorPrimary"
-            android:textColor="@android:color/white"
-            android:layout_margin="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="0dp"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_above="@+id/music_bar"
+        android:layout_below="@id/my_toolbar">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/vacation_feed"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:layout_width="match_parent"
-            android:layout_below="@id/back_to_vacations_button"
             android:layout_height="wrap_content" />
 
         <android.support.design.widget.FloatingActionButton
