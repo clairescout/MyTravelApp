@@ -116,11 +116,8 @@ public class SpotifySearchActivity extends AppCompatActivity {
             Song africa = new Song("Toto", "Africa", "Toto IV", "2374M0fQpWi3dLnB54qaLX");
             songs.add(africa);
 
-//            Song budapest = new Song("George Ezra", "Budapest", "Wanted on Voyage", "7q0aQpiLv5tIsupcgQ3Ny4");
-//            songs.add(budapest);
-
-//            Song portugal = new Song("WALK THE MOON", "Portugal", "TALKING IS HARD", "3MYWKl8ScgDu3sAvyneMCG");
-//            songs.add(portugal);
+            Song portugal = new Song("WALK THE MOON", "Portugal", "TALKING IS HARD", "3MYWKl8ScgDu3sAvyneMCG");
+            songs.add(portugal);
 
             return songs;
         }
@@ -142,8 +139,7 @@ public class SpotifySearchActivity extends AppCompatActivity {
         albumCovers.put("Magic", R.drawable.magic);
         albumCovers.put("Geography", R.drawable.geography);
         albumCovers.put("Toto IV", R.drawable.toto);
-//        albumCovers.put("Wanted On Voyage", R.drawable.wanted_on_voyage);
-//        albumCovers.put("TALKING IS HARD", R.drawable.talking_is_hard);
+        albumCovers.put("TALKING IS HARD", R.drawable.talking_is_hard);
     }
 
     public void goToVacationFeed(String tripId, String songId) {
