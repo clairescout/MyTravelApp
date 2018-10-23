@@ -25,7 +25,7 @@
             android:layout_gravity="center"
             android:text="Toolbar Title"
             android:textColor="@android:color/white"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
     </android.support.v7.widget.Toolbar>
 

@@ -31,6 +31,17 @@ public class AddMediaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_media);
 
+        initializeWidgets();
+    }
+
+    public void goToVacationFeed(String tripId) {
+        Intent intent = new Intent(this, VacationFeedActivity.class);
+        intent.putExtra("tripId", tripId);
+        startActivity(intent);
+    }
+
+    public void initializeWidgets() {
+
         Intent intent = getIntent();
         final String tripID = intent.getStringExtra("tripId");
         String photoId = intent.getStringExtra("photoId");
@@ -51,18 +62,19 @@ public class AddMediaActivity extends AppCompatActivity {
 
         uploadButton = findViewById(R.id.upload);
         uploadButton.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               AddMediaPresenter.getInstance().addMediaToTrip(userEnteredText.getText().toString());
-               goToVacationFeed(tripID);
-           }
+            @Override
+            public void onClick(View v) {
+                AddMediaPresenter.getInstance().addMediaToTrip(userEnteredText.getText().toString());
+                goToVacationFeed(tripID);
+            }
         });
-    }
 
-    public void goToVacationFeed(String tripId) {
-        Intent intent = new Intent(this, VacationFeedActivity.class);
-        intent.putExtra("tripId", tripId);
-        startActivity(intent);
+
+        android.support.v7.widget.Toolbar myToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.addmedia_toolbar);
+        setSupportActionBar(myToolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
 }

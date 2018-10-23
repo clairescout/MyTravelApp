@@ -2,7 +2,7 @@
     <string name="app_name">My Travels</string>
     <string name="title_activity_choose_location">ChooseLocationActivity</string>
     <string name="title_activity_new_vacation">NewVacationActivity</string>
-    <string name="title_activity_my_vacations">MyVacationsActivity</string>
+    <string name="title_activity_my_vacations">My Travels</string>
     <string name="title_activity_vacation_feed">VacationFeedActivity</string>
     <string name="title_activity_add_media">AddMediaActivity</string>
     <string name="title_activity_add_text">AddTextActivity</string>
