@@ -33,7 +33,10 @@
     <EditText
         android:id="@+id/memory_text"
         android:layout_width="353dp"
-        android:layout_height="42dp"
+        android:layout_height="500dp"
+        android:isScrollContainer="true"
+        android:minHeight="120dp"
+        android:inputType="textMultiLine"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -41,12 +44,11 @@
         android:ems="10"
         android:gravity="center"
         android:color="@color/colorPrimary"
-        android:inputType="text|textPersonName"
         android:shadowColor="@color/colorPrimary"
         android:hint="@string/journal_entry"
         android:textColor="@color/colorPrimary"
         android:textColorHint="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/upload"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +69,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.582" />
 
 </android.support.constraint.ConstraintLayout>

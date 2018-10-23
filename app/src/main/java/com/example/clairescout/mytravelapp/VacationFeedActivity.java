@@ -44,6 +44,7 @@ import com.spotify.protocol.types.PlayerState;
 import com.spotify.protocol.types.Track;
 
 import presenters.ChooseMediaPresenter;
+import presenters.SpotifySearchPresenter;
 import presenters.VacationFeedPresenter;
 import com.example.models.Trip;
 import com.example.models.Memory;
@@ -76,12 +77,13 @@ public class VacationFeedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_vacation_feed);
 
         Intent intent = getIntent();
-        currentSongID = intent.getStringExtra("currentSongId");
+        tripID = intent.getStringExtra("tripId");
+        VacationFeedPresenter.getInstance().setCurrentTrip(tripID);
+        currentSongID = VacationFeedPresenter.getInstance().getSongId();
         if (currentSongID != null) {
             RelativeLayout musicBar = findViewById(R.id.music_bar);
             musicBar.setVisibility(View.VISIBLE);
         }
-        tripID = intent.getStringExtra("tripId");
         VacationFeedPresenter.getInstance().setCurrentTrip(tripID);
 
         initializeWidgets();

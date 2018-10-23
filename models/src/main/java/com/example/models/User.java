@@ -54,13 +54,13 @@ public class User {
     private void makeFakeData() {
         Trip trip = new Trip("Jerusalem", new ArrayList<Memory>(),
                 Calendar.getInstance().getTime(), Calendar.getInstance().getTime(),
-                new Song("Mason Jennings", "idk", "idk", "asdf"), -33.852, 151.211);
+                new Song("Mason Jennings", "idk", "idk", null), -33.852, 151.211);
         Trip trip2 = new Trip("Jordan", new ArrayList<Memory>(),
                 Calendar.getInstance().getTime(), Calendar.getInstance().getTime(),
-                new Song("Mason Jennings", "idk", "idk", "asdf"), -28, 140.2);
+                new Song("Mason Jennings", "idk", "idk", null), -28, 140.2);
         Trip trip3 = new Trip("Hawaii", new ArrayList<Memory>(),
                 Calendar.getInstance().getTime(), Calendar.getInstance().getTime(),
-                new Song("Mason Jennings", "idk", "idk", "asdf"), -45, 160);
+                new Song("Mason Jennings", "idk", "idk", null), -45, 160);
         addTrip(trip);
         addTrip(trip2);
         addTrip(trip3);

@@ -85,11 +85,11 @@ public class SpotifySearchActivity extends AppCompatActivity {
                     String songName = song.getName();
                     String artistName = song.getArtist();
                     String albumName = song.getAlbum();
-                    String id = "1TkzittARXqOUAP9wHTJwH"; // TODO: get actual id from Spotify API, this is just the Places ID
+                    String id = song.getId();
 
                     SpotifySearchPresenter.getInstance().addSongToTrip(songName, artistName, albumName, id);
 
-                    goToVacationFeed(tripID, song.getId());
+                    goToVacationFeed(tripID);
                 }
             });
         }
@@ -142,10 +142,9 @@ public class SpotifySearchActivity extends AppCompatActivity {
         albumCovers.put("TALKING IS HARD", R.drawable.talking_is_hard);
     }
 
-    public void goToVacationFeed(String tripId, String songId) {
+    public void goToVacationFeed(String tripId) {
         Intent intent = new Intent(this, VacationFeedActivity.class);
         intent.putExtra("tripId", tripId);
-        intent.putExtra("currentSongId", songId);
         startActivity(intent);
     }
 

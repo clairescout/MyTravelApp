@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="#F0F0F0"
     tools:context="com.example.clairescout.mytravelapp.VacationFeedActivity">
 
     <android.support.v7.widget.Toolbar
@@ -38,8 +39,10 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/vacation_feed"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

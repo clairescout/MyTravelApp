@@ -34,4 +34,8 @@ public class VacationFeedPresenter {
         currentTrip.addMemory(photo);
     }
 
+    public String getSongId() {
+        return currentTrip.getSong().getId();
+    }
+
 }
