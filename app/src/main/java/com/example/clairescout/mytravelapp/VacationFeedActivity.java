@@ -79,6 +79,7 @@ public class VacationFeedActivity extends AppCompatActivity {
         Intent intent = getIntent();
         tripID = intent.getStringExtra("tripId");
         VacationFeedPresenter.getInstance().setCurrentTrip(tripID);
+        VacationFeedPresenter.getInstance().addInstructionCard();
         currentSongID = VacationFeedPresenter.getInstance().getSongId();
         if (currentSongID != null) {
             RelativeLayout musicBar = findViewById(R.id.music_bar);
@@ -105,6 +106,7 @@ public class VacationFeedActivity extends AppCompatActivity {
                 // image.setImageResource(R.drawable.templemount);
                 Bitmap compressedBitmap = BitmapFactory.decodeByteArray(((Photo) memory).getByteArray(),0,((Photo) memory).getByteArray().length);
                 image.setImageBitmap(compressedBitmap);
+                image.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -284,6 +286,7 @@ public class VacationFeedActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        VacationFeedPresenter.getInstance().removeInstructionCard();
         if (currentSongID != null) {
             pauseMusic();
             SpotifyAppRemote.CONNECTOR.disconnect(mSpotifyAppRemote);

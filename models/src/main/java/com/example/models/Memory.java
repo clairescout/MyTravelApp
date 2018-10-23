@@ -15,6 +15,11 @@ public class Memory {
         id = UUID.randomUUID().toString();
     }
 
+    public Memory(String text, String id) {
+        this.text = text;
+        this.id = id;
+    }
+
     public Memory() {
         id = UUID.randomUUID().toString();
     }
