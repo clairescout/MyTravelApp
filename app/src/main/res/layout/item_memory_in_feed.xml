@@ -12,8 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
-        card_view:cardCornerRadius="5dp"
-        card_view:cardElevation="15dp" >
+        card_view:cardCornerRadius="3dp"
+        card_view:cardElevation="10dp" >
 
         <LinearLayout
             android:layout_width="match_parent"

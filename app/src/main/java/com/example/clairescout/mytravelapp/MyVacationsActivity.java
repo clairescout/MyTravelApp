@@ -40,9 +40,6 @@ public class MyVacationsActivity extends AppCompatActivity implements OnMapReady
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_vacations);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.my_map);
-        mapFragment.getMapAsync(this);
 
         initializeWidgits();
     }
