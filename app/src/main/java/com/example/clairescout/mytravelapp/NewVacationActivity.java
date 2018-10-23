@@ -45,7 +45,7 @@ public class NewVacationActivity extends AppCompatActivity implements DatePicker
     }
 
     public void goToChooseLocation(String tripId) {
-        Intent intent = new Intent(this, ChooseLocationActivity.class);
+        Intent intent = new Intent(this, VacationFeedActivity.class);
         intent.putExtra("tripId", tripId);
         startActivity(intent);
     }
