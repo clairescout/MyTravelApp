@@ -14,4 +14,7 @@
     <string name="upload">Upload</string>
     <string name="journal_entry">Journal Entry</string>
     <string name="write_caption">Write Caption</string>
+    <string name="camera_label">Choose Picture</string>
+    <string name="text_label">Write Journal Entry</string>
+    <string name="song_label">Add Song</string>
 </resources>

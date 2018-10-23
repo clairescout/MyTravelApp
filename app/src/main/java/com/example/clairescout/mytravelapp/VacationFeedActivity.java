@@ -63,6 +63,9 @@ public class VacationFeedActivity extends AppCompatActivity {
     private FloatingActionButton addPhotoButton;
     private FloatingActionButton addTextButton;
     private FloatingActionButton addSongButton;
+    private TextView photoFABText;
+    private TextView textFABText;
+    private TextView songFABText;
     private RecyclerView memoryRecycler;
     private MemoryAdapter memoryAdapter;
     private TextView title;
@@ -144,7 +147,6 @@ public class VacationFeedActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-        System.out.println("onStart method");
         super.onStart();
         ConnectionParams connectionParams =
                 new ConnectionParams.Builder(CLIENT_ID)
@@ -160,7 +162,6 @@ public class VacationFeedActivity extends AppCompatActivity {
                         Log.d("VacationFeedActivity", "Connected! Yay!");
 
                         // Now you can start interacting with App Remote
-                        System.out.println("onStart, soon to be connected");
                         connected();
 
                     }
@@ -251,6 +252,10 @@ public class VacationFeedActivity extends AppCompatActivity {
             }
         });
 
+        photoFABText = findViewById(R.id.camera_text);
+        textFABText = findViewById(R.id.text_text);
+        songFABText = findViewById(R.id.spotify_text);
+
         addMediaButton = findViewById(R.id.add_media_floating_action_button);
         addMediaButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -260,12 +265,20 @@ public class VacationFeedActivity extends AppCompatActivity {
                     findViewById(R.id.camera_button).setVisibility(View.VISIBLE);
                     findViewById(R.id.text_button).setVisibility(View.VISIBLE);
                     findViewById(R.id.spotify_button).setVisibility(View.VISIBLE);
+
+                    photoFABText.setVisibility(View.VISIBLE);
+                    textFABText.setVisibility(View.VISIBLE);
+                    songFABText.setVisibility(View.VISIBLE);
                 }
                 else {
                     actionButtonsHidden = true;
                     findViewById(R.id.camera_button).setVisibility(View.GONE);
                     findViewById(R.id.text_button).setVisibility(View.GONE);
                     findViewById(R.id.spotify_button).setVisibility(View.GONE);
+
+                    photoFABText.setVisibility(View.GONE);
+                    textFABText.setVisibility(View.GONE);
+                    songFABText.setVisibility(View.GONE);
                 }
             }
         });
@@ -288,8 +301,10 @@ public class VacationFeedActivity extends AppCompatActivity {
         super.onStop();
         VacationFeedPresenter.getInstance().removeInstructionCard();
         if (currentSongID != null) {
+            System.out.println("onStop 1");
             pauseMusic();
             SpotifyAppRemote.CONNECTOR.disconnect(mSpotifyAppRemote);
+            System.out.println("onStop 2");
         } else {
             super.onStop();
         }

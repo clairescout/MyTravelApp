@@ -41,7 +41,7 @@ public class VacationFeedPresenter {
 
     public void addInstructionCard() {
         if (currentTrip.getMemories().size() == 0) {
-            Memory instructionCard = new Memory("Welcome to your vacation feed! Click the plus button to add a new memory!", "temp_memory");
+            Memory instructionCard = new Memory("Welcome to your vacation feed! Click the add button to add a new memory!", "temp_memory");
             currentTrip.addMemory(instructionCard);
         }
     }
