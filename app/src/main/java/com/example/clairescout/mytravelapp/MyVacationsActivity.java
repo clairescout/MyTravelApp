@@ -1,6 +1,8 @@
 package com.example.clairescout.mytravelapp;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -12,9 +14,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.models.Memory;
+import com.example.models.Photo;
 import com.example.models.Trip;
 import com.example.models.User;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -72,11 +77,13 @@ public class MyVacationsActivity extends AppCompatActivity implements OnMapReady
         private TextView startDate;
         private TextView endDate;
         private String tripId;
+        private ImageView vacationImage;
         public VacationHolder(@NonNull View itemView) {
             super(itemView);
             vacationName = itemView.findViewById(R.id.vacation_name);
             startDate = itemView.findViewById(R.id.start_date);
             endDate = itemView.findViewById(R.id.end_date);
+            vacationImage = itemView.findViewById(R.id.card_image);
             ConstraintLayout constraintLayout = itemView.findViewById(R.id.vacation_item_constraint);
             constraintLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -91,6 +98,16 @@ public class MyVacationsActivity extends AppCompatActivity implements OnMapReady
             startDate.setText(trip.getStartDateString());
             endDate.setText(trip.getEndDateString());
             tripId = trip.getId();
+            if (trip.getMemories().size() > 0) {
+                for (Memory memory : trip.getMemories()) {
+                    if (memory instanceof Photo) {
+                        Bitmap compressedBitmap = BitmapFactory.decodeByteArray(((Photo) memory).getByteArray(),0,((Photo) memory).getByteArray().length);
+                        vacationImage.setImageBitmap(compressedBitmap);
+                        vacationImage.setVisibility(View.VISIBLE);
+                        break;
+                    }
+                }
+            }
         }
 
 

@@ -86,7 +86,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
-        card_view:cardCornerRadius="0dp"
+        card_view:cardCornerRadius="2dp"
         card_view:cardElevation="15dp"
         android:id="@+id/vacation_card">
         <LinearLayout
@@ -96,6 +96,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
+                android:minWidth="400dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/templemount"
                 android:id="@+id/card_image"/>

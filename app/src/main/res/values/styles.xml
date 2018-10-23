@@ -21,8 +21,4 @@
         <item name="android:textColorSecondary">@android:color/white</item>
     </style>
 
-    <style name="ToolbarColoredSearch" parent="ThemeOverlay.AppCompat.Light">
-        <item name="android:textColorSecondary">@android:color/white</item>
-    </style>
-
 </resources>
