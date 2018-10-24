@@ -358,8 +358,8 @@ public class VacationFeedActivity extends AppCompatActivity {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
                 // Toast.makeText(this, "Uploading Image", Toast.LENGTH_LONG).show();
-                Bitmap resized = Bitmap.createScaledBitmap(bitmap,(int)(bitmap.getWidth()*0.2), (int)(bitmap.getHeight()*0.2), true);
-                resized.compress(Bitmap.CompressFormat.PNG, 30, stream);
+                Bitmap resized = Bitmap.createScaledBitmap(bitmap,(int)(bitmap.getWidth()*0.1), (int)(bitmap.getHeight()*0.1), true);
+                resized.compress(Bitmap.CompressFormat.PNG, 20, stream);
                 Photo photo = new Photo();
                 photo.setByteArray(stream.toByteArray());
                 VacationFeedPresenter.getInstance().addPhoto(photo);
