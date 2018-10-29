@@ -24,6 +24,8 @@ import android.widget.ImageView;
 import android.support.v4.app.DialogFragment;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.media.AudioManager;
+import android.content.Context;
 
 import android.util.Log;
 import android.widget.Toast;
@@ -34,6 +36,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import com.example.models.JournalEntry;
 import com.example.models.User;
 import com.example.models.Photo;
 import com.spotify.android.appremote.api.ConnectionParams;
@@ -42,6 +45,7 @@ import com.spotify.android.appremote.api.SpotifyAppRemote;
 import com.spotify.protocol.client.Subscription;
 import com.spotify.protocol.types.PlayerState;
 import com.spotify.protocol.types.Track;
+import com.spotify.protocol.client.CallResult;
 
 import presenters.ChooseMediaPresenter;
 import presenters.SpotifySearchPresenter;
@@ -82,7 +86,6 @@ public class VacationFeedActivity extends AppCompatActivity {
         Intent intent = getIntent();
         tripID = intent.getStringExtra("tripId");
         VacationFeedPresenter.getInstance().setCurrentTrip(tripID);
-        VacationFeedPresenter.getInstance().addInstructionCard();
         currentSongID = VacationFeedPresenter.getInstance().getSongId();
         if (currentSongID != null) {
             RelativeLayout musicBar = findViewById(R.id.music_bar);
@@ -94,12 +97,14 @@ public class VacationFeedActivity extends AppCompatActivity {
     }
 
     private class MemoryHolder extends RecyclerView.ViewHolder {
+        private TextView title;
         private TextView text;
         private ImageView image;
         private ImageView memoryOptions;
 
         public MemoryHolder(@NonNull View itemView) {
             super(itemView);
+            title = itemView.findViewById(R.id.memory_title);
             text = itemView.findViewById(R.id.memory_text);
             image = itemView.findViewById(R.id.memory_photo);
             memoryOptions = itemView.findViewById(R.id.edit_delete_button);
@@ -114,6 +119,9 @@ public class VacationFeedActivity extends AppCompatActivity {
                 Bitmap compressedBitmap = BitmapFactory.decodeByteArray(((Photo) memory).getByteArray(),0,((Photo) memory).getByteArray().length);
                 image.setImageBitmap(compressedBitmap);
                 image.setVisibility(View.VISIBLE);
+            } else if (memory instanceof JournalEntry) {
+                title.setText(((JournalEntry) memory).getTitle());
+                title.setVisibility(View.VISIBLE);
             }
             memoryOptions.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -191,10 +199,28 @@ public class VacationFeedActivity extends AppCompatActivity {
     }
 
     private void connected() {
+
         // Play a playlist
         if (currentSongID != null) {
+
+            AudioManager manager = (AudioManager)this.getSystemService(Context.AUDIO_SERVICE);
+
+            int volume = manager.getStreamVolume(AudioManager.STREAM_MUSIC);
+            manager.setStreamVolume(AudioManager.STREAM_MUSIC, 0,0);
+
             mSpotifyAppRemote.getPlayerApi().play("spotify:track:" + currentSongID);
-            pauseMusic();
+            while (!manager.isMusicActive())
+            {
+                System.out.println("music is not active");
+            }
+
+            mSpotifyAppRemote.getPlayerApi().pause();
+
+            while (manager.isMusicActive()) {
+                System.out.println("music is active");
+            }
+
+            manager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0);
         }
 
         // Subscribe to PlayerState
@@ -212,12 +238,6 @@ public class VacationFeedActivity extends AppCompatActivity {
         });
     }
 
-    private void pauseMusic() {
-        if (currentSongID != null) {
-            mSpotifyAppRemote.getPlayerApi().pause();
-        }
-    }
-
     private void initializeWidgets() {
         playButton = findViewById(R.id.play_button);
         playButton.setOnClickListener(new View.OnClickListener() {
@@ -229,7 +249,7 @@ public class VacationFeedActivity extends AppCompatActivity {
                     paused = false;
                 }
                 else {
-                    pauseMusic();
+                    mSpotifyAppRemote.getPlayerApi().pause();
                     playButton.setImageResource(R.drawable.play_accent);
                     paused = true;
                 }
@@ -313,16 +333,11 @@ public class VacationFeedActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-        super.onStop();
-        VacationFeedPresenter.getInstance().removeInstructionCard();
         if (currentSongID != null) {
-            System.out.println("onStop 1");
-            pauseMusic();
+            mSpotifyAppRemote.getPlayerApi().pause();
             SpotifyAppRemote.CONNECTOR.disconnect(mSpotifyAppRemote);
-            System.out.println("onStop 2");
-        } else {
-            super.onStop();
         }
+        super.onStop();
     }
 
     void showDialog() {
@@ -346,7 +361,7 @@ public class VacationFeedActivity extends AppCompatActivity {
 
     private void goBackToMyVacations() {
         if (currentSongID != null) {
-            pauseMusic();
+            mSpotifyAppRemote.getPlayerApi().pause();
         }
         Intent intent = new Intent(this, MyVacationsActivity.class);
         startActivity(intent);
@@ -374,7 +389,6 @@ public class VacationFeedActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
 
         //Detects request codes
         if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
