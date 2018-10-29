@@ -9,6 +9,10 @@ public class JournalEntry extends Memory {
         this.title = title;
     }
 
+    public JournalEntry() {
+
+    }
+
     public String getTitle() {
         return title;
     }
