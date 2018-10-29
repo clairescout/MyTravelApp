@@ -42,18 +42,17 @@ public class AddTextPresenter {
 //        currentMemory.setText(textEntry);
     public void addTextToTrip(String titleEntry, String textEntry) {
 //        Memory memory = new Memory(textEntry);
-        JournalEntry journalEntry = new JournalEntry(titleEntry, textEntry);
+        currentMemory.setTitle(titleEntry);
+        currentMemory.setText(textEntry);
 
         List<Memory> currMemories = currentTrip.getMemories();
         if (currMemories == null) {
             ArrayList<Memory> memories = new ArrayList<>();
             memories.add(currentMemory);
-            memories.add(journalEntry);
             currentTrip.setMemories(memories);
         }
         else {
             currentTrip.addMemory(currentMemory);
-            currMemories.add(journalEntry);
         }
     }
 
