@@ -36,7 +36,10 @@ public class VacationFeedPresenter {
     }
 
     public String getSongId() {
-        return currentTrip.getSong().getId();
+        if (currentTrip.getSong() != null) {
+            return currentTrip.getSong().getId();
+        }
+        return null;
     }
 
     public void addInstructionCard() {

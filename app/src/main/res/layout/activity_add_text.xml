@@ -30,45 +30,104 @@
         <!--android:layout_margin="@dimen/fab_margin"-->
         <!--app:srcCompat="@android:drawable/ic_dialog_email" />-->
 
-    <EditText
-        android:id="@+id/memory_text"
-        android:layout_width="353dp"
-        android:layout_height="500dp"
-        android:isScrollContainer="true"
-        android:minHeight="120dp"
-        android:inputType="textMultiLine"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:gravity="center"
-        android:color="@color/colorPrimary"
-        android:shadowColor="@color/colorPrimary"
-        android:hint="@string/journal_entry"
-        android:textColor="@color/colorPrimary"
-        android:textColorHint="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/upload"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.533"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.345" />
+    <!--<EditText-->
+        <!--android:id="@+id/memory_text"-->
+        <!--android:layout_width="353dp"-->
+        <!--android:layout_height="500dp"-->
+        <!--android:isScrollContainer="true"-->
+        <!--android:minHeight="120dp"-->
+        <!--android:inputType="textMultiLine"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:ems="10"-->
+        <!--android:gravity="center"-->
+        <!--android:color="@color/colorPrimary"-->
+        <!--android:shadowColor="@color/colorPrimary"-->
+        <!--android:hint="@string/journal_entry"-->
+        <!--android:textColor="@color/colorPrimary"-->
+        <!--android:textColorHint="@color/colorPrimary"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/upload"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.533"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:layout_constraintVertical_bias="0.345" />-->
 
-    <Button
-        android:id="@+id/upload"
-        android:layout_width="355dp"
-        android:layout_height="41dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/upload"
-        android:background="@color/colorPrimary"
-        android:textColor="@android:color/white"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/addmedia_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:theme="@style/ToolbarColoredBackArrow"
+        app:popupTheme="@style/AppTheme"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Add Journal Entry"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
+    </android.support.v7.widget.Toolbar>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_text_linear"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/upload_linear"
+        app:layout_constraintTop_toBottomOf="@+id/photo_linear"
+        android:elevation="20dp">
+
+        <EditText
+            android:id="@+id/memory_text"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:color="@color/colorPrimary"
+            android:ems="10"
+            android:padding="10dp"
+            android:inputType="textMultiLine"
+            android:shadowColor="@color/colorPrimary"
+            android:hint="@string/text_label"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimary"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="426dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/upload_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.582" />
+        android:background="#E8E8E8">
+
+        <Button
+            android:id="@+id/upload"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:layout_margin="8dp"
+            android:background="@color/colorPrimary"
+            android:padding="8dp"
+            android:text="@string/upload"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
