@@ -1,5 +1,6 @@
 package presenters;
 
+import com.example.models.JournalEntry;
 import com.example.models.Trip;
 import com.example.models.User;
 import com.example.models.Memory;
@@ -28,17 +29,18 @@ public class AddTextPresenter {
         return currentTrip.getId();
     }
 
-    public void addTextToTrip(String textEntry) {
-        Memory memory = new Memory(textEntry);
+    public void addTextToTrip(String titleEntry, String textEntry) {
+//        Memory memory = new Memory(textEntry);
+        JournalEntry journalEntry = new JournalEntry(titleEntry, textEntry);
 
         List<Memory> currMemories = currentTrip.getMemories();
         if (currMemories == null) {
             ArrayList<Memory> memories = new ArrayList<>();
-            memories.add(memory);
+            memories.add(journalEntry);
             currentTrip.setMemories(memories);
         }
         else {
-            currMemories.add(memory);
+            currMemories.add(journalEntry);
         }
     }
 

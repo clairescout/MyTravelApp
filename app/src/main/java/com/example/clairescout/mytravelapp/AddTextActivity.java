@@ -14,6 +14,7 @@ import presenters.AddTextPresenter;
 
 public class AddTextActivity extends AppCompatActivity {
 
+    private EditText userEnteredTitle;
     private EditText userEnteredText;
     private Button uploadButton;
 
@@ -26,13 +27,14 @@ public class AddTextActivity extends AppCompatActivity {
         final String tripID = intent.getStringExtra("tripId");
         AddTextPresenter.getInstance().setCurrentTrip(tripID);
 
+        userEnteredTitle = findViewById(R.id.memory_title);
         userEnteredText = findViewById(R.id.memory_text);
 
         uploadButton = findViewById(R.id.upload);
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddTextPresenter.getInstance().addTextToTrip(userEnteredText.getText().toString());
+                AddTextPresenter.getInstance().addTextToTrip(userEnteredTitle.getText().toString(), userEnteredText.getText().toString());
                 goToVacationFeed(tripID);
             }
         });
