@@ -185,13 +185,14 @@ public class VacationFeedActivity extends AppCompatActivity {
     }
 
     private void connected() {
-        AudioManager manager = (AudioManager)this.getSystemService(Context.AUDIO_SERVICE);
-
-        int volume = manager.getStreamVolume(AudioManager.STREAM_MUSIC);
-        manager.setStreamVolume(AudioManager.STREAM_MUSIC, 0,0);
 
         // Play a playlist
         if (currentSongID != null) {
+
+            AudioManager manager = (AudioManager)this.getSystemService(Context.AUDIO_SERVICE);
+
+            int volume = manager.getStreamVolume(AudioManager.STREAM_MUSIC);
+            manager.setStreamVolume(AudioManager.STREAM_MUSIC, 0,0);
 
             mSpotifyAppRemote.getPlayerApi().play("spotify:track:" + currentSongID);
             while (!manager.isMusicActive())
@@ -200,9 +201,13 @@ public class VacationFeedActivity extends AppCompatActivity {
             }
 
             mSpotifyAppRemote.getPlayerApi().pause();
-        }
 
-        manager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0);
+            while (manager.isMusicActive()) {
+                System.out.println("music is active");
+            }
+
+            manager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0);
+        }
 
         // Subscribe to PlayerState
         mSpotifyAppRemote.getPlayerApi()
