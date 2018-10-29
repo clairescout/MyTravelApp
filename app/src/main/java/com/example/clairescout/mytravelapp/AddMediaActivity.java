@@ -58,6 +58,9 @@ public class AddMediaActivity extends AppCompatActivity {
         imageView.setImageBitmap(compressedBitmap);
 
         userEnteredText = findViewById(R.id.photo_caption);
+        if (AddMediaPresenter.getInstance().hasText()) {
+            userEnteredText.setText(AddMediaPresenter.getInstance().getText());
+        }
 
 
         uploadButton = findViewById(R.id.upload);

@@ -17,4 +17,10 @@
     <string name="camera_label">Choose Picture</string>
     <string name="text_label">Write Journal Entry</string>
     <string name="song_label">Add Song</string>
+    <string name="edit_memory">Edit</string>
+    <string name="delete_memory">Delete</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
