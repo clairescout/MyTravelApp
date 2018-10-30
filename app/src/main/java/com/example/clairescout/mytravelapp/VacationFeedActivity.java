@@ -109,8 +109,6 @@ public class VacationFeedActivity extends AppCompatActivity {
             text = itemView.findViewById(R.id.memory_text);
             image = itemView.findViewById(R.id.memory_photo);
             memoryOptions = itemView.findViewById(R.id.edit_delete_button);
-
-
         }
 
         public void bindMemory(final Memory memory) {
@@ -219,13 +217,13 @@ public class VacationFeedActivity extends AppCompatActivity {
             mSpotifyAppRemote.getPlayerApi().play("spotify:track:" + currentSongID);
             while (!manager.isMusicActive())
             {
-                System.out.println("music is not active");
+//                System.out.println("music is not active");
             }
 
             mSpotifyAppRemote.getPlayerApi().pause();
 
             while (manager.isMusicActive()) {
-                System.out.println("music is active");
+//                System.out.println("music is active");
             }
 
             manager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0);

@@ -39,11 +39,15 @@
 
         <TextView
             android:id="@+id/no_memories_text"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:visibility="gone"
+            android:gravity="center_vertical"
             android:text="@string/no_memories"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@color/colorPrimary"
+            android:padding="12dp"
+            android:textSize="28sp"
+            android:textAlignment="center"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/vacation_feed"
