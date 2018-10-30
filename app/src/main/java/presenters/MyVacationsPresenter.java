@@ -33,7 +33,7 @@ public class MyVacationsPresenter {
                 if (i == 0 ) {
                     Photo photo2 = new Photo();
                     photo2.setPhotoDrawable(R.drawable.aida);
-                    photo2.setText("Sweet angel");
+                    photo2.setText("Aida");
                     trip.addMemory(photo2);
                     Photo photo1 = new Photo();
                     photo1.setPhotoDrawable(R.drawable.leo);
@@ -43,7 +43,7 @@ public class MyVacationsPresenter {
                 } else if (i == 1) {
                     Photo photo2 = new Photo();
                     photo2.setPhotoDrawable(R.drawable.bench);
-                    photo2.setText("Father, son, and grandson");
+                    photo2.setText("The family having a great time at the cabin");
                     trip.addMemory(photo2);
 //                    Photo photo1 = new Photo();
 //                    photo1.setPhotoDrawable(R.drawable.aida);
