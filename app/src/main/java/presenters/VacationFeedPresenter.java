@@ -42,6 +42,13 @@ public class VacationFeedPresenter {
         return null;
     }
 
+    public boolean tripMemoriesExist() {
+        if (currentTrip.getMemories().size() > 0) {
+            return true;
+        }
+        return false;
+    }
+
     public void addInstructionCard() {
         if (currentTrip.getMemories().size() == 0) {
             Memory instructionCard = new Memory("Welcome to your vacation feed! Click the add button to add a new memory!", "temp_memory");

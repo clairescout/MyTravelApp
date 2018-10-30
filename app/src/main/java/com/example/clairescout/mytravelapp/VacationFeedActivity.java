@@ -73,6 +73,7 @@ public class VacationFeedActivity extends AppCompatActivity {
     private RecyclerView memoryRecycler;
     private MemoryAdapter memoryAdapter;
     private TextView title;
+    private TextView noMemoriesText;
 
     private String tripID;
     private boolean paused = true;
@@ -241,6 +242,11 @@ public class VacationFeedActivity extends AppCompatActivity {
                 }
             }
         });
+
+        noMemoriesText = findViewById(R.id.no_memories_text);
+        if (!VacationFeedPresenter.getInstance().tripMemoriesExist()) {
+            noMemoriesText.setVisibility(View.VISIBLE);
+        }
 
         memoryRecycler = findViewById(R.id.vacation_feed);
         memoryRecycler.setLayoutManager(new LinearLayoutManager(this));

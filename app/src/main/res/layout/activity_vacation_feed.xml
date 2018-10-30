@@ -37,6 +37,14 @@
         android:layout_above="@+id/music_bar"
         android:layout_below="@id/my_toolbar">
 
+        <TextView
+            android:id="@+id/no_memories_text"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:text="@string/no_memories"
+            android:textColor="@color/colorPrimaryDark" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/vacation_feed"
             android:paddingLeft="8dp"
