@@ -51,10 +51,11 @@ public class AddMediaActivity extends AppCompatActivity {
         String photoId = intent.getStringExtra("photoId");
         AddMediaPresenter.getInstance().setCurrentTrip(tripID);
         Photo photo = AddMediaPresenter.getInstance().getCurrentPhoto(photoId);
+        imageView = findViewById(R.id.chosenImage);
         if (photo.getByteArray() != null) {
             byte[] byteArray = photo.getByteArray();
             Bitmap compressedBitmap = BitmapFactory.decodeByteArray(byteArray,0,byteArray.length);
-            imageView = findViewById(R.id.chosenImage);
+
             imageView.setImageBitmap(compressedBitmap);
         } else {
             imageView.setImageDrawable(getApplicationContext().getDrawable(photo.getPhotoDrawable()));

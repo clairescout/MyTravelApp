@@ -60,7 +60,8 @@ public class AddMediaPresenter {
     }
 
     public Photo getCurrentPhoto(String photoId) {
-        return (Photo) currentTrip.getMemoryById(photoId);
+        currentPhoto = (Photo) currentTrip.getMemoryById(photoId);
+        return currentPhoto;
     }
 
     public boolean hasText() {
