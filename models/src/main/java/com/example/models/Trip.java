@@ -92,6 +92,12 @@ public class Trip {
         }
     }
 
+    public void deleteMemory(String memoryId) {
+        Memory memory = getMemoryById(memoryId);
+        idToMemory.remove(memory);
+        memories.remove(memory);
+    }
+
     public void setSong(Song song) {
         this.song = song;
     }

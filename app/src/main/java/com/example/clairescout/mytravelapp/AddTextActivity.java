@@ -17,6 +17,7 @@ public class AddTextActivity extends AppCompatActivity {
     private EditText userEnteredTitle;
     private EditText userEnteredText;
     private Button uploadButton;
+    private String memoryId = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +27,14 @@ public class AddTextActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final String tripID = intent.getStringExtra("tripId");
         AddTextPresenter.getInstance().setCurrentTrip(tripID);
+        memoryId = intent.getStringExtra("memoryId");
+        AddTextPresenter.getInstance().setCurrentMemory(memoryId);
 
         userEnteredTitle = findViewById(R.id.memory_title);
         userEnteredText = findViewById(R.id.memory_text);
+        if (memoryId != null) {
+            userEnteredText.setText(AddTextPresenter.getInstance().getText());
+        }
 
         uploadButton = findViewById(R.id.upload);
         uploadButton.setOnClickListener(new View.OnClickListener() {

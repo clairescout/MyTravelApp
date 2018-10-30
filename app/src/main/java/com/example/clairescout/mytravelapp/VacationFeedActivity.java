@@ -101,26 +101,40 @@ public class VacationFeedActivity extends AppCompatActivity {
         private TextView title;
         private TextView text;
         private ImageView image;
+        private ImageView memoryOptions;
 
         public MemoryHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.memory_title);
             text = itemView.findViewById(R.id.memory_text);
             image = itemView.findViewById(R.id.memory_photo);
+            memoryOptions = itemView.findViewById(R.id.edit_delete_button);
+
+
         }
 
-        public void bindMemory(Memory memory) {
+        public void bindMemory(final Memory memory) {
             text.setText(memory.getText());
             if (memory instanceof Photo) {
                 // image.setImageResource(R.drawable.templemount);
                 Bitmap compressedBitmap = BitmapFactory.decodeByteArray(((Photo) memory).getByteArray(),0,((Photo) memory).getByteArray().length);
                 image.setImageBitmap(compressedBitmap);
                 image.setVisibility(View.VISIBLE);
-            }
-            else if (memory instanceof JournalEntry) {
+            } else if (memory instanceof JournalEntry) {
                 title.setText(((JournalEntry) memory).getTitle());
                 title.setVisibility(View.VISIBLE);
             }
+            memoryOptions.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (memory instanceof Photo) {
+                        showMemoryOptionsDialog(memory.getId(), true);
+                    } else {
+                        showMemoryOptionsDialog(memory.getId(), false);
+                    }
+
+                }
+            });
         }
     }
 
@@ -337,6 +351,18 @@ public class VacationFeedActivity extends AppCompatActivity {
         DialogFragment chooseMediaFragment = ChooseMediaFragment.newInstance();
         ((ChooseMediaFragment) chooseMediaFragment).setTripID(tripID);
         chooseMediaFragment.show(getSupportFragmentManager(), "dialog");
+    }
+
+    void showMemoryOptionsDialog(String memoryId, boolean isPhoto) {
+        DialogFragment memoryOptionsFragment = MemoryOptionsFragment.newInstance();
+        ((MemoryOptionsFragment) memoryOptionsFragment).setMemoryId(memoryId);
+        ((MemoryOptionsFragment) memoryOptionsFragment).setIsPhoto(isPhoto);
+        ((MemoryOptionsFragment) memoryOptionsFragment).setTripId(tripID);
+        memoryOptionsFragment.show(getSupportFragmentManager(), "dialog");
+    }
+
+    public void handleDialogClose() {
+        memoryAdapter.notifyDataSetChanged();
     }
 
     private void goBackToMyVacations() {

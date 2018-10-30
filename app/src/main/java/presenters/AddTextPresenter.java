@@ -12,6 +12,7 @@ public class AddTextPresenter {
 
     private static AddTextPresenter single_instance = new AddTextPresenter();
     private Trip currentTrip;
+    private JournalEntry currentMemory;
 
     private AddTextPresenter() {
 
@@ -25,23 +26,38 @@ public class AddTextPresenter {
         currentTrip = User.getInstance().getTripById(tripId);
     }
 
+    public void setCurrentMemory(String memoryId) {
+        if (memoryId == null) {
+            currentMemory = new JournalEntry();
+        } else {
+            currentMemory = (JournalEntry) currentTrip.getMemoryById(memoryId);
+        }
+    }
+
     public String getTripId(){
         return currentTrip.getId();
     }
 
+//    public void addTextToTrip(String textEntry) {
+//        currentMemory.setText(textEntry);
     public void addTextToTrip(String titleEntry, String textEntry) {
 //        Memory memory = new Memory(textEntry);
-        JournalEntry journalEntry = new JournalEntry(titleEntry, textEntry);
+        currentMemory.setTitle(titleEntry);
+        currentMemory.setText(textEntry);
 
         List<Memory> currMemories = currentTrip.getMemories();
         if (currMemories == null) {
             ArrayList<Memory> memories = new ArrayList<>();
-            memories.add(journalEntry);
+            memories.add(currentMemory);
             currentTrip.setMemories(memories);
         }
         else {
-            currMemories.add(journalEntry);
+            currentTrip.addMemory(currentMemory);
         }
+    }
+
+    public String getText() {
+        return currentMemory.getText();
     }
 
 }

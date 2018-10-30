@@ -51,12 +51,23 @@ public class AddMediaPresenter {
 
     public byte[] getCurrentPhotoBytes(String photoId) {
         Memory memory = currentTrip.getMemoryById(photoId);
-        if (memory.getClass() == Photo.class) {
+        if (memory instanceof  Photo) {
             currentPhoto = (Photo) memory;
             return currentPhoto.getByteArray();
         }
         // TODO: throw error
         else return new byte[0];
+    }
+
+    public boolean hasText() {
+        if (currentPhoto.getText() != null && currentPhoto.getText() != "" ) {
+            return true;
+        }
+        return false;
+    }
+
+    public String getText() {
+        return currentPhoto.getText();
     }
 
 }
