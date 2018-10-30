@@ -25,6 +25,8 @@ public class AddMediaActivity extends AppCompatActivity {
     private EditText userEnteredText;
     private Button uploadButton;
     private ImageView imageView;
+    private boolean isEdit = false;
+    private String tripID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,7 @@ public class AddMediaActivity extends AppCompatActivity {
     public void initializeWidgets() {
 
         Intent intent = getIntent();
-        final String tripID = intent.getStringExtra("tripId");
+        tripID = intent.getStringExtra("tripId");
         String photoId = intent.getStringExtra("photoId");
         AddMediaPresenter.getInstance().setCurrentTrip(tripID);
         byte[] byteArray = AddMediaPresenter.getInstance().getCurrentPhotoBytes(photoId);
@@ -60,6 +62,7 @@ public class AddMediaActivity extends AppCompatActivity {
         userEnteredText = findViewById(R.id.photo_caption);
         if (AddMediaPresenter.getInstance().hasText()) {
             userEnteredText.setText(AddMediaPresenter.getInstance().getText());
+            isEdit = true;
         }
 
 
@@ -79,6 +82,27 @@ public class AddMediaActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isEdit) {
+            Intent intent = new Intent(this, VacationFeedActivity.class);
+            intent.putExtra("tripId", tripID);
+            startActivity(intent);
+        } else {
+            AddMediaPresenter.getInstance().deleteMemory();
+            Intent intent = new Intent(this, VacationFeedActivity.class);
+            intent.putExtra("tripId", tripID);
+            startActivity(intent);
+        }
+
     }
 
 }

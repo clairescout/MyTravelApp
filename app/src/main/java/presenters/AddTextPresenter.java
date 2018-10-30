@@ -60,4 +60,8 @@ public class AddTextPresenter {
         return currentMemory.getText();
     }
 
+    public String getTitle() {
+        return currentMemory.getTitle();
+    }
+
 }

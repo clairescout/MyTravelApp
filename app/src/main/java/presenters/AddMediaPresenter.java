@@ -70,4 +70,8 @@ public class AddMediaPresenter {
         return currentPhoto.getText();
     }
 
+    public void deleteMemory() {
+        currentTrip.deleteMemory(currentPhoto.getId());
+    }
+
 }

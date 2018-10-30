@@ -7,8 +7,8 @@ package com.example.models;
 
 public class Photo extends Memory{
     private String photoPath;
-    private byte[] byteArray;
-
+    private byte[] byteArray = null;
+    private int photoDrawable;
     public Photo(String text, String photoPath) {
         super(text);
         this.photoPath = photoPath;
@@ -31,5 +31,13 @@ public class Photo extends Memory{
 
     public void setByteArray(byte[] byteArray) {
         this.byteArray = byteArray;
+    }
+
+    public int getPhotoDrawable() {
+        return photoDrawable;
+    }
+
+    public void setPhotoDrawable(int photoDrawable) {
+        this.photoDrawable = photoDrawable;
     }
 }

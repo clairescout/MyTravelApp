@@ -34,6 +34,7 @@ public class AddTextActivity extends AppCompatActivity {
         userEnteredText = findViewById(R.id.memory_text);
         if (memoryId != null) {
             userEnteredText.setText(AddTextPresenter.getInstance().getText());
+            userEnteredTitle.setText(AddTextPresenter.getInstance().getTitle());
         }
 
         uploadButton = findViewById(R.id.upload);

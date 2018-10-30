@@ -52,37 +52,35 @@
     </LinearLayout>
 
 
-
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/edit_text_linear"
-        app:layout_constraintRight_toLeftOf="parent"
-        app:layout_constraintLeft_toRightOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="114dp"
+        android:elevation="20dp"
         app:layout_constraintBottom_toTopOf="@+id/upload_linear"
-        app:layout_constraintTop_toBottomOf="@+id/photo_linear"
-        android:elevation="20dp">
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/photo_linear">
 
         <EditText
             android:id="@+id/photo_caption"
-            android:background="@null"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:color="@color/colorPrimary"
-            android:ems="10"
-            android:padding="10dp"
-            android:inputType="textMultiLine"
-            android:shadowColor="@color/colorPrimary"
-            android:hint="@string/write_caption"
-            android:textColor="@color/colorPrimary"
-            android:textColorHint="@color/colorPrimary"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="426dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            />
+            android:background="@null"
+            android:color="@color/colorPrimary"
+            android:ems="10"
+            android:hint="@string/write_caption"
+            android:inputType="textMultiLine"
+            android:padding="10dp"
+            android:shadowColor="@color/colorPrimary"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="#A9A9A9"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="426dp" />
     </LinearLayout>
 
 

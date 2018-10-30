@@ -31,6 +31,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
+import presenters.MyVacationsPresenter;
+
 
 public class MyVacationsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -44,6 +46,7 @@ public class MyVacationsActivity extends AppCompatActivity implements OnMapReady
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_vacations);
+        MyVacationsPresenter.getInstance().initializeTripsMemories();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
 
         initializeWidgits();
@@ -101,10 +104,14 @@ public class MyVacationsActivity extends AppCompatActivity implements OnMapReady
             if (trip.getMemories().size() > 0) {
                 for (Memory memory : trip.getMemories()) {
                     if (memory instanceof Photo) {
-                        Bitmap compressedBitmap = BitmapFactory.decodeByteArray(((Photo) memory).getByteArray(),0,((Photo) memory).getByteArray().length);
-                        vacationImage.setImageBitmap(compressedBitmap);
-                        vacationImage.setVisibility(View.VISIBLE);
-                        break;
+                        if (((Photo) memory).getByteArray() != null) {
+                            Bitmap compressedBitmap = BitmapFactory.decodeByteArray(((Photo) memory).getByteArray(),0,((Photo) memory).getByteArray().length);
+                            vacationImage.setImageBitmap(compressedBitmap);
+                            vacationImage.setVisibility(View.VISIBLE);
+                            break;
+                        } else {
+                            vacationImage.setImageDrawable(getApplicationContext().getDrawable(((Photo) memory).getPhotoDrawable()));
+                        }
                     }
                 }
             }

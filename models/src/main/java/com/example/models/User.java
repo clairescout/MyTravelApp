@@ -52,15 +52,20 @@ public class User {
     }
 
     private void makeFakeData() {
-        Trip trip = new Trip("Jerusalem", new ArrayList<Memory>(),
+        Trip trip = new Trip("Sundance", new ArrayList<Memory>(),
                 Calendar.getInstance().getTime(), Calendar.getInstance().getTime(),
                 new Song("Mason Jennings", "idk", "idk", null), -33.852, 151.211);
-        Trip trip2 = new Trip("Jordan", new ArrayList<Memory>(),
+        Trip trip2 = new Trip("The Cabin", new ArrayList<Memory>(),
                 Calendar.getInstance().getTime(), Calendar.getInstance().getTime(),
                 new Song("Mason Jennings", "idk", "idk", null), -28, 140.2);
-        Trip trip3 = new Trip("Hawaii", new ArrayList<Memory>(),
+        Trip trip3 = new Trip("Washington" +
+                "", new ArrayList<Memory>(),
                 Calendar.getInstance().getTime(), Calendar.getInstance().getTime(),
                 new Song("Mason Jennings", "idk", "idk", null), -45, 160);
+//        Photo photo1 = new Photo();
+//        photo1.setPhotoPath("R.drawable.jordan_river");
+//        photo1.setText("Leo is cute");
+//        trip.addMemory(photo1);
         addTrip(trip);
         addTrip(trip2);
         addTrip(trip3);

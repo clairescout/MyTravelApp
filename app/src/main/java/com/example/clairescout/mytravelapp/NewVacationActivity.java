@@ -2,7 +2,9 @@ package com.example.clairescout.mytravelapp;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -36,6 +39,7 @@ public class NewVacationActivity extends AppCompatActivity implements DatePicker
     private boolean start = false;
     private Date startDateObject = new Date();
     private Date endDateObject = new Date();
+    private View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +63,16 @@ public class NewVacationActivity extends AppCompatActivity implements DatePicker
     private void setDate(final Calendar calendar) {
         final DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
         if (start) {
+           // startDate.setBackgroundResource(R.color.colorPrimary);
+            startDate.setTextColor(Color.parseColor("#068587"));
             startDate.setText(dateFormat.format(calendar.getTime()));
             startDateObject = calendar.getTime();
+            start = false;
+            datePicker(view);
+
         } else {
+            //endDate.setBackgroundResource(R.color.colorPrimary);
+            endDate.setTextColor(Color.parseColor("#068587"));
             endDate.setText(dateFormat.format(calendar.getTime()));
             endDateObject = calendar.getTime();
         }
@@ -107,6 +118,15 @@ public class NewVacationActivity extends AppCompatActivity implements DatePicker
             }
         });
 
+//        vacationName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (hasFocus)
+//                    vacationName.setHint("");
+//                else
+//                    vacationName.setHint("Vacation Name");
+//            }
+//        });
+
         nextButton = findViewById(R.id.new_trip_next_button);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +146,9 @@ public class NewVacationActivity extends AppCompatActivity implements DatePicker
             @Override
             public void onClick(View v) {
                 start = true;
+                view = v;
+                InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                mgr.hideSoftInputFromWindow(vacationName.getWindowToken(), 0);
                 datePicker(v);
             }
         });

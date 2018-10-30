@@ -117,8 +117,15 @@ public class VacationFeedActivity extends AppCompatActivity {
             text.setText(memory.getText());
             if (memory instanceof Photo) {
                 // image.setImageResource(R.drawable.templemount);
-                Bitmap compressedBitmap = BitmapFactory.decodeByteArray(((Photo) memory).getByteArray(),0,((Photo) memory).getByteArray().length);
-                image.setImageBitmap(compressedBitmap);
+                if (((Photo) memory).getByteArray() != null) {
+                    Bitmap compressedBitmap = BitmapFactory.decodeByteArray(((Photo) memory).getByteArray(),0,((Photo) memory).getByteArray().length);
+                    image.setImageBitmap(compressedBitmap);
+
+                } else {
+//                   int id = getResources().getIdentifier("drawable/jordan_river.JPG", null, null);
+//                   image.setImageResource(id);
+                    image.setImageDrawable(getApplicationContext().getDrawable(((Photo) memory).getPhotoDrawable()));
+                }
                 image.setVisibility(View.VISIBLE);
             } else if (memory instanceof JournalEntry) {
                 title.setText(((JournalEntry) memory).getTitle());
