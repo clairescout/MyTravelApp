@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.models.Photo;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -48,16 +50,25 @@ public class AddMediaActivity extends AppCompatActivity {
         tripID = intent.getStringExtra("tripId");
         String photoId = intent.getStringExtra("photoId");
         AddMediaPresenter.getInstance().setCurrentTrip(tripID);
-        byte[] byteArray = AddMediaPresenter.getInstance().getCurrentPhotoBytes(photoId);
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeResource(getResources(), R.id.chosenImage, options);
-        int imageHeight = options.outHeight;
-        int imageWidth = options.outWidth;
-        String imageType = options.outMimeType;
-        Bitmap compressedBitmap = BitmapFactory.decodeByteArray(byteArray,0,byteArray.length);
-        imageView = findViewById(R.id.chosenImage);
-        imageView.setImageBitmap(compressedBitmap);
+        Photo photo = AddMediaPresenter.getInstance().getCurrentPhoto(photoId);
+        if (photo.getByteArray() != null) {
+            byte[] byteArray = photo.getByteArray();
+            Bitmap compressedBitmap = BitmapFactory.decodeByteArray(byteArray,0,byteArray.length);
+            imageView = findViewById(R.id.chosenImage);
+            imageView.setImageBitmap(compressedBitmap);
+        } else {
+            imageView.setImageDrawable(getApplicationContext().getDrawable(photo.getPhotoDrawable()));
+        }
+
+
+//        if (((Photo) memory).getByteArray() != null) {
+//            Bitmap compressedBitmap = BitmapFactory.decodeByteArray(((Photo) memory).getByteArray(),0,((Photo) memory).getByteArray().length);
+//            vacationImage.setImageBitmap(compressedBitmap);
+//            vacationImage.setVisibility(View.VISIBLE);
+//            break;
+//        } else {
+//            vacationImage.setImageDrawable(getApplicationContext().getDrawable(((Photo) memory).getPhotoDrawable()));
+//        }
 
         userEnteredText = findViewById(R.id.photo_caption);
         if (AddMediaPresenter.getInstance().hasText()) {

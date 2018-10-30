@@ -34,6 +34,7 @@ import android.widget.Toolbar;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.List;
 
 import com.example.models.JournalEntry;
@@ -102,6 +103,7 @@ public class VacationFeedActivity extends AppCompatActivity {
         private TextView text;
         private ImageView image;
         private ImageView memoryOptions;
+        private TextView date;
 
         public MemoryHolder(@NonNull View itemView) {
             super(itemView);
@@ -109,6 +111,8 @@ public class VacationFeedActivity extends AppCompatActivity {
             text = itemView.findViewById(R.id.memory_text);
             image = itemView.findViewById(R.id.memory_photo);
             memoryOptions = itemView.findViewById(R.id.edit_delete_button);
+            date = itemView.findViewById(R.id.date_text_view);
+
         }
 
         public void bindMemory(final Memory memory) {
@@ -140,6 +144,8 @@ public class VacationFeedActivity extends AppCompatActivity {
 
                 }
             });
+            final DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
+            date.setText(dateFormat.format(memory.getDate()));
         }
     }
 

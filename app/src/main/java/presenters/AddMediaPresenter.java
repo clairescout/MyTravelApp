@@ -59,6 +59,10 @@ public class AddMediaPresenter {
         else return new byte[0];
     }
 
+    public Photo getCurrentPhoto(String photoId) {
+        return (Photo) currentTrip.getMemoryById(photoId);
+    }
+
     public boolean hasText() {
         if (currentPhoto.getText() != null && currentPhoto.getText() != "" ) {
             return true;
